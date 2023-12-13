@@ -1,37 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans" rel="stylesheet" />
+
     <title>Vite + React + TS</title>
   </head>
-  
+
   <!-- override the styles -->
   <style>
-    .px-counter{
+    .px-counter {
       background-color: aqua;
     }
   </style>
   <body>
-
     <script>
       function myFun() {
-       alert("myFun called")
-      }   
+        alert('myFun called')
+      }
 
-      window.addEventListener("px-close", () => {
-        alert("called px-close")
-      })    
-      
-      
+      window.addEventListener('px-close', () => {
+        alert('called px-close')
+      })
     </script>
 
     <!-- <div id="root"></div> -->
 
-    <px-counter name="krishna" on-action="myFun" my-object='{"name": "name 1"}' ></px-counter>
+    <!-- <px-counter name="krishna" on-action="myFun" my-object='{"name": "name 1"}' ></px-counter> -->
 
-    <px-jo-engagement></px-jo-engagement>
+    <px-jo-engagement cancel-action="myFun"></px-jo-engagement>
 
     <script type="module" src="/src/main.tsx"></script>
     <!-- <script type="module" src="/dist/r2wc/px-counter.r2wc.es.js"></script> -->
