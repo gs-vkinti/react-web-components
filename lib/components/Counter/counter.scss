@@ -1,0 +1,31 @@
+@import "../../assets/scss/base";
+
+.px-counter {
+  background-color: grey;
+  padding: 10px 20px;
+
+  &__count {
+    font-weight: bold;
+    color: $royal-blue-70;
+    text-align: center;
+  }
+
+  &__buttons {
+    text-align: center;
+
+    button {
+      color: blue;
+    }
+  }
+
+  &__click-me {
+    padding-top: 16px;
+    cursor: pointer;
+  }
+
+  &__my-object {
+    margin-top: 10px;
+    background-color: white;
+    padding: 10px 6px;
+  }
+}

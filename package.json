@@ -1,0 +1,51 @@
+{
+  "name": "react-web-components-poc",
+  "version": "0.0.17",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/rc/px-jo-engagements.umd.js",
+  "module": "./dist/rc/px-jo-engagements.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/rc/px-jo-engagements.es.js",
+      "require": "./dist/rc/px-jo-engagements.umd.js"
+    },
+    "./webcomponents": {
+      "import": "./dist/r2wc/px-jo-engagements.r2wc.es.js",
+      "require": "./dist/r2wc/px-jo-engagements.r2wc.umd.js",
+      "types": "./dist/r2wc/px-jo-engagements.r2wc.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --p ./tsconfig.build.json && vite build",
+    "build-r2wc": "tsc --p ./tsconfig.build.json && vite build --mode R2WC",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@r2wc/react-to-web-component": "^2.0.3",
+    "path": "^0.12.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.69.5",
+    "vitest": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/css-modules": "^1.0.5",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
+  }
+}
