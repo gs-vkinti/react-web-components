@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
 
-import Header from './components/Header'
+import Header from '../components/Header'
 
 type JOEngagementProps = {
   container: any

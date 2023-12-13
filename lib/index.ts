@@ -1,5 +1,3 @@
-import Counter from "./components/Counter";
+import JOEngagement from './JOEngagement'
 
-import JOEngagement from "./components/JOEngagement";
-
-export { Counter, JOEngagement };
+export default JOEngagement
