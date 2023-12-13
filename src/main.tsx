@@ -1,26 +1,27 @@
-import r2wc from "@r2wc/react-to-web-component";
-import { Counter, JOEngagement } from "../lib";
+import r2wc from '@r2wc/react-to-web-component'
+import { Counter, JOEngagement } from '../lib'
 
-window.customElements.get("px-counter") ||
+window.customElements.get('px-counter') ||
   window.customElements.define(
-    "px-counter",
+    'px-counter',
     r2wc(Counter, {
       props: {
-        name: "string",
-        onAction: "function",
-        myObject: "json",
+        name: 'string',
+        onAction: 'function',
+        myObject: 'json'
       },
-      shadow: "open",
+      shadow: 'open'
     })
-  );
+  )
 
-window.customElements.get("px-jo-engagement") ||
+window.customElements.get('px-jo-engagement') ||
   window.customElements.define(
-    "px-jo-engagement",
+    'px-jo-engagement',
     r2wc(JOEngagement, {
       props: {
-        subscriptionId: "string",
+        subscriptionId: 'string',
+        cancelAction: 'function'
       },
-      shadow: "open",
+      shadow: 'open'
     })
-  );
+  )
