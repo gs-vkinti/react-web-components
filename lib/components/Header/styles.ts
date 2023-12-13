@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import * as colors from '../styles/colors'
+import * as colors from '../../styles/colors'
 
 export const styles = () => css`
   display: flex;
@@ -7,7 +7,7 @@ export const styles = () => css`
   padding: 16px;
   border-bottom: 1px solid ${colors.RICH_GRAY_30};
 
-  .header--text {
+  .joe-header__title {
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
