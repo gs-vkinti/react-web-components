@@ -8,7 +8,7 @@ import createCache from '@emotion/cache'
 
 import { Header, TitleBar } from '../components'
 
-type JOEngagementProps = {
+interface JOEngagementProps {
   container: any
   subscriptionId: string
   cancelAction: () => void
