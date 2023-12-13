@@ -16,6 +16,10 @@
     .px-counter {
       background-color: aqua;
     }
+
+    body {
+      margin: 0;
+    }
   </style>
   <body>
     <script>
@@ -32,7 +36,9 @@
 
     <!-- <px-counter name="krishna" on-action="myFun" my-object='{"name": "name 1"}' ></px-counter> -->
 
-    <px-jo-engagement cancel-action="myFun"></px-jo-engagement>
+    <div style="height:100vh;">
+      <px-jo-engagement cancel-action="myFun"></px-jo-engagement>
+    </div>
 
     <script type="module" src="/src/main.tsx"></script>
     <!-- <script type="module" src="/dist/r2wc/px-counter.r2wc.es.js"></script> -->

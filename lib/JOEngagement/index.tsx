@@ -32,7 +32,9 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
       <style type='text/css'>{styles}</style>
       <div className='px-jo-engagements'>
         <Header onClose={props.cancelAction} />
-        <TitleBar />
+        <div className='px-jo-engagements__body'>
+          <TitleBar />
+        </div>
       </div>
     </CacheProvider>
   )

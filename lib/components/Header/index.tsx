@@ -14,9 +14,11 @@ type props = {
 const Header: FC<props> = ({ onClose }) => {
   return (
     <div css={styles()}>
-      <div className='joe-header__title'>{SELECT_PX_ENGAGEMENT}</div>
-      <div onClick={onClose} className='joe-header__cancel-icon'>
-        <CancelIcon />
+      <div className='joe-header'>
+        <div className='joe-header__title'>{SELECT_PX_ENGAGEMENT}</div>
+        <div onClick={onClose} className='joe-header__cancel-icon'>
+          <CancelIcon />
+        </div>
       </div>
     </div>
   )

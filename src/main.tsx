@@ -11,5 +11,5 @@ window.customElements.get('px-jo-engagement') ||
         cancelAction: 'function'
       },
       shadow: 'open'
-    })
+    } as object)
   )

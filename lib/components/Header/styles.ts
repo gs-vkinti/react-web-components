@@ -1,16 +1,23 @@
 import { css } from '@emotion/react'
-import * as colors from '../../styles/colors'
+import { RICH_GRAY_30 } from '../../styles/colors'
 
 export const styles = () => css`
-  display: flex;
-  justify-content: space-between;
-  padding: 16px;
-  border-bottom: 1px solid ${colors.RICH_GRAY_30};
+  .joe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 16px 16px 24px;
+    border-bottom: solid 1px ${RICH_GRAY_30};
 
-  .joe-header__title {
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 24px;
+    &__title {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.33;
+      text-align: left;
+    }
+
+    &__cancel-icon {
+      cursor: pointer;
+    }
   }
 `
