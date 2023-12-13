@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
 
-import { Header } from '../components'
+import { Header, TitleBar } from '../components'
 
 interface JOEngagementProps {
   container: any
@@ -32,6 +32,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
       <style type='text/css'>{styles}</style>
       <div className='px-jo-engagements'>
         <Header onClose={props.cancelAction} />
+        <TitleBar />
       </div>
     </CacheProvider>
   )
