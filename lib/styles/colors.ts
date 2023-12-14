@@ -2,7 +2,12 @@
  Here we should put our constant colors.
  Wherever possible, we should re-use the color we have here instead of introducing new ones.
  */
+
+export const GRAY_TERTIARY_LIGHTER = '#E3EAF1'
+
 // Horizon colors
+
+export const RICH_GRAY_0 = '#fff'
 export const RICH_GRAY_10 = '#fbfbfc'
 export const RICH_GRAY_20 = '#f5f7f9'
 export const RICH_GRAY_30 = '#e6e9ec'

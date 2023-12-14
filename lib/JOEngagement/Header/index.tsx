@@ -16,9 +16,8 @@ const Header: FC<props> = ({ onClose }) => {
     <div css={styles()}>
       <div className='joe-header'>
         <div className='joe-header__title'>{SELECT_PX_ENGAGEMENT}</div>
-        <div onClick={onClose} className='joe-header__cancel-icon'>
-          <CancelIcon />
-        </div>
+
+        <CancelIcon onClick={onClose} className='joe-header__cancel-icon' />
       </div>
     </div>
   )

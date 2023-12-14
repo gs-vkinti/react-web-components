@@ -1,4 +1,5 @@
-import Header from './Header'
-import Search from './Search'
-import TitleBar from './TitlteBar'
-export { Header, Search, TitleBar }
+import TextField from './TextField'
+import SearchField from './TextField/Search'
+import FilterDropdown from './FilterDropdown'
+
+export { TextField, SearchField, FilterDropdown }
