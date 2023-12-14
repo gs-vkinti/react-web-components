@@ -30,3 +30,11 @@ export interface FilterTypeOb {
   itemKey: string
   options: ProductOption[] | ChannelOption[] | EngagementTypeOption[] | LabelOption[] | EnvironmentOption[]
 }
+
+export interface EngagementCardProps {
+  type: string
+  name: string
+  environments: string[]
+  labels: string[]
+  image: string
+}

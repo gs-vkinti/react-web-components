@@ -7,7 +7,7 @@ export const styles = () => css`
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 12px 0;
+    padding: 16px 0;
     border-bottom: 1px solid ${RICH_GRAY_40};
   }
 `

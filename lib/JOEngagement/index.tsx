@@ -11,6 +11,7 @@ import { getFilterOptions } from './utils'
 import Header from './Header'
 import TitleBar from './TitleBar'
 import Filters from './Filters'
+import EngagementsList from './EngagementsList'
 
 interface JOEngagementProps {
   container: any
@@ -38,6 +39,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
       <style type='text/css'>{styles}</style>
       <div className='px-jo-engagements'>
         <Header onClose={props.cancelAction} />
+
         <div className='px-jo-engagements__body'>
           <TitleBar
             engagementCount={100}
@@ -46,6 +48,8 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
             isSearching={false}
           />
           <Filters filterOptions={getFilterOptions()} />
+
+          <EngagementsList />
         </div>
       </div>
     </CacheProvider>

@@ -34,3 +34,6 @@ export const TART_RED_70 = '#dc3626'
 export const HONEY_YELLOW_70 = '#f4a702'
 
 export const FRESH_GREEN_70 = '#13ad68'
+
+export const BELL_BLUE_20 = '#ebecfa'
+export const BELL_BLUE_40 = '#b8bdeb'
