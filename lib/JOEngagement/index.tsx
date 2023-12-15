@@ -1,7 +1,11 @@
 // @ts-ignore
 import styles from './jo-engagement.scss?inline'
+// @ts-ignore
+import tippy_styles from 'tippy.js/dist/tippy.css?inline'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useRef } from 'react'
+
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
@@ -22,7 +26,7 @@ interface JOEngagementProps {
 
 export default function JOEngagement({ container, ...props }: JOEngagementProps) {
   console.log('JOEngagement props', props)
-
+  const containerRef = useRef<HTMLDivElement>(null)
   const [searchText, setSearchText] = useState<string>('')
   const [viewType, setViewType] = useState<string>('list')
 
@@ -36,30 +40,55 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
     [container]
   )
 
+  const horizonTheme = createTheme({
+    components: {
+      MuiPopover: {
+        defaultProps: {
+          container: () => containerRef.current
+        }
+      },
+      MuiPopper: {
+        defaultProps: {
+          container: () => containerRef.current
+        }
+      },
+      MuiModal: {
+        defaultProps: {
+          container: () => containerRef.current
+        }
+      }
+    }
+  })
+
   return (
     <CacheProvider value={cache}>
-      <style type='text/css'>{styles}</style>
-      <div className='px-jo-engagements'>
-        <Header onClose={props.cancelAction} />
+      <ThemeProvider theme={horizonTheme}>
+        <style type='text/css'>
+          {styles}
+          {tippy_styles}
+        </style>
+        <div className='px-jo-engagements' ref={containerRef}>
+          <Header onClose={props.cancelAction} />
 
-        <div className='px-jo-engagements__body'>
-          {viewType === 'list' ? (
-            <>
-              <TitleBar
-                engagementCount={100}
-                searchText={searchText}
-                setSearchText={setSearchText}
-                isSearching={false}
-              />
-              <Filters filterOptions={getFilterOptions()} />
+          <div className='px-jo-engagements__body'>
+            {viewType === 'list' ? (
+              <>
+                <TitleBar
+                  engagementCount={100}
+                  searchText={searchText}
+                  setSearchText={setSearchText}
+                  isSearching={false}
+                />
+                <Filters filterOptions={getFilterOptions()} />
 
-              <EngagementsList setViewType={setViewType} />
-            </>
-          ) : (
-            <EngagementPreview engagement={{}} setViewType={setViewType} />
-          )}
+                <EngagementsList setViewType={setViewType} />
+              </>
+            ) : (
+              <EngagementPreview engagement={{}} setViewType={setViewType} />
+            )}
+          </div>
         </div>
-      </div>
+      </ThemeProvider>
     </CacheProvider>
   )
 }

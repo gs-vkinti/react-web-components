@@ -3,6 +3,7 @@ import { styles } from './styles'
 
 import { memo, useState, FC } from 'react'
 import cx from 'classnames'
+import Tippy from '@tippyjs/react'
 
 import { FilterDropdownProps } from '../../JOEngagement/JOEngagement.types'
 import { SmallEqualIcon, SmallDownChevronIcon } from '../../assets/icons'
@@ -27,9 +28,9 @@ const FilterDropdown: FC<FilterDropdownProps> = props => {
           <div className='joe-filter-dropdown__filter-label'>{props.label}</div>
 
           <SmallEqualIcon />
-
-          <div className='joe-filter-dropdown__filter-value'>{filterValue}</div>
-
+          <Tippy content={filterValue} interactive arrow={false} placement='bottom' offset={[0, 0]}>
+            <div className='joe-filter-dropdown__filter-value'>{filterValue}</div>
+          </Tippy>
           <SmallDownChevronIcon />
         </div>
       </div>
