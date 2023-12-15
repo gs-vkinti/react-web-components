@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 
-import { RICH_GRAY_20, RICH_GRAY_40, RICH_GRAY_60 } from '../../styles/colors'
+import { RICH_GRAY_20, RICH_GRAY_40, RICH_GRAY_60, RICH_GRAY_70 } from '../../styles/colors'
 
 export const styles = () => css`
   .joe-preview {
@@ -41,6 +41,37 @@ export const styles = () => css`
       display: flex;
       flex-direction: column;
       gap: 24px;
+      align-items: center;
+
+      &__config {
+        line-height: 1.5;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        &__title {
+          font-size: 16px;
+          font-weight: 600;
+        }
+        &__row {
+          display: flex;
+          justify-content: flex-start;
+          gap: 48px;
+        }
+        &__field {
+          display: flex;
+          flex-direction: column;
+
+          &__name {
+            font-size: 14px;
+            font-weight: 600;
+          }
+          &__value {
+            color: ${RICH_GRAY_70};
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+      }
 
       &__slides {
         display: flex;
@@ -49,23 +80,15 @@ export const styles = () => css`
         gap: 8px;
 
         &__image {
-          width: 60vw;
-          height: 400px;
+          width: 55vw;
+          height: 40vh;
           border-radius: 4px;
           border: 1px solid ${RICH_GRAY_40};
           background: ${RICH_GRAY_20};
           display: flex;
           align-items: center;
           justify-content: center;
-
-          > img {
-            width: 361px;
-            height: 369px;
-            border: 1px solid black;
-          }
         }
-      }
-      $__config {
       }
     }
   }

@@ -25,7 +25,41 @@ const EngagementPreview: FC<EngagementPreviewProps> = ({ setViewType }) => {
             </div>
             <Pagination activePage={activePage} countPage={4} setActivePage={setActivePage} />
           </div>
-          <div className='joe-preview__content__config'>Configuration</div>
+          <div className='joe-preview__content__config'>
+            <div className='joe-preview__content__config__title'>Schedule</div>
+            <div className='joe-preview__content__config__row'>
+              <div className='joe-preview__content__config__field'>
+                <div className='joe-preview__content__config__field__name'>Timezone</div>
+                <div className='joe-preview__content__config__field__value'>America/Los Angeles</div>
+              </div>
+              <div className='joe-preview__content__config__field'>
+                <div className='joe-preview__content__config__field__name'>From</div>
+                <div className='joe-preview__content__config__field__value'>04/04/2023 • 12:00 AM</div>
+              </div>
+              <div className='joe-preview__content__config__field'>
+                <div className='joe-preview__content__config__field__name'>To</div>
+                <div className='joe-preview__content__config__field__value'>04/05/2023 • 12:00 AM</div>
+              </div>
+            </div>
+
+            <div className='joe-preview__content__config__row'>
+              <div className='joe-preview__content__config__field'>
+                <div className='joe-preview__content__config__field__name'>Qualification Rule</div>
+                <div className='joe-preview__content__config__field__value'>
+                  Once per visit : The user will see the engagement a single time across any number of visits
+                  under the specified date range.
+                </div>
+              </div>
+            </div>
+            <div className='joe-preview__content__config__row'>
+              <div className='joe-preview__content__config__field'>
+                <div className='joe-preview__content__config__field__name'>Throttling</div>
+                <div className='joe-preview__content__config__field__value'>
+                  No throttling settings applied.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <Footer />
       </div>
