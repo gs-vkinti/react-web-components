@@ -44,3 +44,9 @@ export interface EngagementPreviewProps {
   engagement: object
   setViewType: (type: string) => void
 }
+
+export interface PaginationProps {
+  activePage: number
+  countPage: number
+  setActivePage: (value: number) => void
+}
