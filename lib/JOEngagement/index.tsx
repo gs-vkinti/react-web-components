@@ -1,9 +1,12 @@
 // @ts-ignore
 import styles from './jo-engagement.scss?inline'
+// @ts-ignore
+import tippy_styles from 'tippy.js/dist/tippy.css?inline'
 
 import { useMemo, useState, useRef } from 'react'
 
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
 
@@ -58,7 +61,10 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={horizonTheme}>
-        <style type='text/css'>{styles}</style>
+        <style type='text/css'>
+          {styles}
+          {tippy_styles}
+        </style>
         <div className='px-jo-engagements' ref={containerRef}>
           <Header onClose={props.cancelAction} />
 
