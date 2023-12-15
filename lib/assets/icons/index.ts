@@ -5,5 +5,15 @@ import SortIcon from './SortIcon'
 import FilterIcon from './FilterIcon'
 import SmallEqualIcon from './SmallEqualIcon'
 import SmallDownChevronIcon from './SmallDownChevronIcon'
+import ArrowLeftIcon from './ArrowLeftIcon'
 
-export { CancelIcon, Loader, SearchIcon, SortIcon, FilterIcon, SmallEqualIcon, SmallDownChevronIcon }
+export {
+  ArrowLeftIcon,
+  CancelIcon,
+  Loader,
+  SearchIcon,
+  SortIcon,
+  FilterIcon,
+  SmallEqualIcon,
+  SmallDownChevronIcon
+}

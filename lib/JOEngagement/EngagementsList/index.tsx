@@ -6,7 +6,10 @@ import range from 'lodash/range'
 
 import { EngagementCard } from '../../components'
 
-const EngagementsList: FC<{}> = () => {
+type props = {
+  setViewType: (type: string) => void
+}
+const EngagementsList: FC<props> = ({ setViewType }) => {
   return (
     <div css={styles()}>
       <div className='joe-engagements-list'>
@@ -19,6 +22,7 @@ const EngagementsList: FC<{}> = () => {
               environments={['Aptrinsic', 'Web App', 'Production']}
               labels={['Engage & Explore', 'Knowledge Center']}
               image=''
+              setViewType={setViewType}
             />
           )
         })}

@@ -12,7 +12,7 @@ const EngagementCard: FC<EngagementCardProps> = props => {
   })
 
   return (
-    <div css={styles()}>
+    <div css={styles()} onClick={() => props.setViewType('preview')}>
       <div className='joe-engagement-card'>
         <div className='joe-engagement-card__view'>
           <div className={engTypeCn}>{props.type}</div>

@@ -37,4 +37,10 @@ export interface EngagementCardProps {
   environments: string[]
   labels: string[]
   image: string
+  setViewType: (type: string) => void
+}
+
+export interface EngagementPreviewProps {
+  engagement: object
+  setViewType: (type: string) => void
 }

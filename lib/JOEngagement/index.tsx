@@ -12,6 +12,7 @@ import Header from './Header'
 import TitleBar from './TitleBar'
 import Filters from './Filters'
 import EngagementsList from './EngagementsList'
+import EngagementPreview from './EngagementPreview'
 
 interface JOEngagementProps {
   container: any
@@ -23,6 +24,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
   console.log('JOEngagement props', props)
 
   const [searchText, setSearchText] = useState<string>('')
+  const [viewType, setViewType] = useState<string>('list')
 
   const cache = useMemo(
     () =>
@@ -41,15 +43,21 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
         <Header onClose={props.cancelAction} />
 
         <div className='px-jo-engagements__body'>
-          <TitleBar
-            engagementCount={100}
-            searchText={searchText}
-            setSearchText={setSearchText}
-            isSearching={false}
-          />
-          <Filters filterOptions={getFilterOptions()} />
+          {viewType === 'list' ? (
+            <>
+              <TitleBar
+                engagementCount={100}
+                searchText={searchText}
+                setSearchText={setSearchText}
+                isSearching={false}
+              />
+              <Filters filterOptions={getFilterOptions()} />
 
-          <EngagementsList />
+              <EngagementsList setViewType={setViewType} />
+            </>
+          ) : (
+            <EngagementPreview engagement={{}} setViewType={setViewType} />
+          )}
         </div>
       </div>
     </CacheProvider>
