@@ -1,8 +1,9 @@
 // @ts-ignore
 import styles from './jo-engagement.scss?inline'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useRef } from 'react'
 
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
 
@@ -21,7 +22,7 @@ interface JOEngagementProps {
 
 export default function JOEngagement({ container, ...props }: JOEngagementProps) {
   console.log('JOEngagement props', props)
-
+  const containerRef = useRef<HTMLDivElement>(null)
   const [searchText, setSearchText] = useState<string>('')
 
   const cache = useMemo(
@@ -34,24 +35,36 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
     [container]
   )
 
+  const horizonTheme = createTheme({
+    components: {
+      MuiPopover: {
+        defaultProps: {
+          container: () => containerRef.current
+        }
+      }
+    }
+  })
+
   return (
     <CacheProvider value={cache}>
-      <style type='text/css'>{styles}</style>
-      <div className='px-jo-engagements'>
-        <Header onClose={props.cancelAction} />
+      <ThemeProvider theme={horizonTheme}>
+        <style type='text/css'>{styles}</style>
+        <div className='px-jo-engagements' ref={containerRef}>
+          <Header onClose={props.cancelAction} />
 
-        <div className='px-jo-engagements__body'>
-          <TitleBar
-            engagementCount={100}
-            searchText={searchText}
-            setSearchText={setSearchText}
-            isSearching={false}
-          />
-          <Filters filterOptions={getFilterOptions()} />
+          <div className='px-jo-engagements__body'>
+            <TitleBar
+              engagementCount={100}
+              searchText={searchText}
+              setSearchText={setSearchText}
+              isSearching={false}
+            />
+            <Filters filterOptions={getFilterOptions()} />
 
-          <EngagementsList />
+            <EngagementsList />
+          </div>
         </div>
-      </div>
+      </ThemeProvider>
     </CacheProvider>
   )
 }
