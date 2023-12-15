@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { styles } from './styles'
 
-import { FC } from 'react'
+import { FC, useState, MouseEvent } from 'react'
+import Popover from '@mui/material/Popover'
 
 import { ACTIVE_ENGAGEMENTS, SEARCH_BY_NAME } from '../../text'
 
@@ -18,6 +19,18 @@ interface TitleBarProps {
 }
 
 const TitleBar: FC<TitleBarProps> = props => {
+  const [anchorEl, setAnchorEl] = useState<null | Element>(null)
+
+  const open = Boolean(anchorEl)
+
+  const openPopover = (event: MouseEvent) => {
+    console.log(event.currentTarget)
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   return (
     <div css={styles()}>
       <div className='joe-title-bar'>
@@ -33,7 +46,18 @@ const TitleBar: FC<TitleBarProps> = props => {
           <div className='joe-title-bar__filters--icons'>
             <div>
               {props.isSortApplied && <span />}
-              <SortIcon />
+              <SortIcon onClick={openPopover} />
+              <Popover
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left'
+                }}
+              >
+                Hello
+              </Popover>
             </div>
             <div>
               {props.isFiltersApplied && <span />}
