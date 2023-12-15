@@ -41,6 +41,16 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
         defaultProps: {
           container: () => containerRef.current
         }
+      },
+      MuiPopper: {
+        defaultProps: {
+          container: () => containerRef.current
+        }
+      },
+      MuiModal: {
+        defaultProps: {
+          container: () => containerRef.current
+        }
       }
     }
   })
