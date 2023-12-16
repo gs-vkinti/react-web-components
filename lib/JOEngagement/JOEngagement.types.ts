@@ -19,10 +19,17 @@ export interface FilterOptions {
 
 export interface FiltersBarProps {
   filterOptions: FilterOptions
+  selectedFilters: SelectedFilters
+  setSelectedFilters: (v: SelectedFilters) => void
 }
 
 export interface FilterDropdownProps extends FilterTypeOb {
   index: number
+  itemKey: string
+  label: string
+  options: DropdownOption[]
+  selectedItems: string[]
+  setSelectedItems: (v: string[]) => void
 }
 
 export interface FilterTypeOb {
@@ -37,4 +44,21 @@ export interface EngagementCardProps {
   environments: string[]
   labels: string[]
   image: string
+}
+
+export interface SortTypeOption {
+  label: string
+  value: string
+}
+
+export interface EngagementsListProps {
+  openFilterBar: boolean
+}
+
+export interface SelectedFilters {
+  products: string[]
+  channels: string[]
+  engagementTypes: string[]
+  labels: string[]
+  environments: string[]
 }

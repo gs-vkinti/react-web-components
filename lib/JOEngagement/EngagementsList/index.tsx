@@ -1,14 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { styles } from './styles'
 
-import { FC, memo } from 'react'
 import range from 'lodash/range'
 
 import { EngagementCard } from '../../components'
+import { EngagementsListProps } from '../JOEngagement.types'
 
-const EngagementsList: FC<{}> = () => {
+export default function EngagementsList(props: EngagementsListProps) {
   return (
-    <div css={styles()}>
+    <div css={styles(props)}>
       <div className='joe-engagements-list'>
         {range(100).map(i => {
           return (
@@ -26,5 +26,3 @@ const EngagementsList: FC<{}> = () => {
     </div>
   )
 }
-
-export default memo(EngagementsList)

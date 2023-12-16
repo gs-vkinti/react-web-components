@@ -1,6 +1,8 @@
 import { css } from '@emotion/react'
 
-export const styles = () => css`
+import { EngagementsListProps } from '../JOEngagement.types'
+
+export const styles = (props: EngagementsListProps) => css`
   .joe-engagements-list {
     padding: 16px 0;
     display: flex;
@@ -10,6 +12,6 @@ export const styles = () => css`
     gap: 16px;
 
     overflow: scroll;
-    height: calc(100vh - 208px); // TODO: we need to subtract if filter bar not open
+    height: calc(100vh - ${props.openFilterBar ? '208px' : '151px'});
   }
 `
