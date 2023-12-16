@@ -1,6 +1,15 @@
 import { css } from '@emotion/react'
 
-import { RICH_GRAY_40, RICH_GRAY_30, RICH_GRAY_0, TART_RED_60 } from '../../styles/colors'
+import {
+  RICH_GRAY_40,
+  RICH_GRAY_30,
+  RICH_GRAY_0,
+  TART_RED_60,
+  RICH_GRAY_90,
+  RICH_GRAY_20,
+  ROYAL_BLUE_70
+} from '../../styles/colors'
+import { POPOVER_SHADOW } from '../../styles/typography'
 
 export const styles = () => css`
   .joe-title-bar {
@@ -35,8 +44,15 @@ export const styles = () => css`
           padding: 4px;
 
           :hover {
-            background-color: ${RICH_GRAY_30};
+            background-color: ${RICH_GRAY_20};
             border-radius: 100%;
+          }
+        }
+
+        &-selected {
+          svg {
+            border-radius: 100%;
+            background-color: ${RICH_GRAY_30} !important;
           }
         }
 
@@ -54,6 +70,38 @@ export const styles = () => css`
             left: 22px;
           }
         }
+      }
+    }
+  }
+`
+
+export const popoverStyles = () => css`
+  .joe-sort-filter-popover {
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 8px 0;
+    border-radius: 4px;
+    box-shadow: ${POPOVER_SHADOW}
+    background-color: ${RICH_GRAY_0};
+
+    &__item {
+      font-size: 14px;
+      line-height: 1.71;
+      letter-spacing: normal;
+      text-align: left;
+      color: ${RICH_GRAY_90};
+      padding: 4px 16px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: ${RICH_GRAY_20};
+      }
+
+      &--selected {
+        color: ${ROYAL_BLUE_70};
       }
     }
   }

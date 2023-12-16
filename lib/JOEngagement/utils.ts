@@ -1,6 +1,7 @@
 import { products, channels, engagementTypes, labels, environments } from './mock'
 
-import { FilterOptions, FilterTypeOb } from './JOEngagement.types'
+import { FilterOptions, FilterTypeOb, SelectedFilters } from './JOEngagement.types'
+import { filterTypes } from './const'
 
 export const getFilterOptions = (): FilterOptions => {
   return {
@@ -17,33 +18,18 @@ export const getFilterDropdownsList = ({
 }: {
   filterOptions: FilterOptions
 }): FilterTypeOb[] => {
-  let filterTypes = [
-    {
-      label: 'product',
-      itemKey: 'products'
-    },
-    {
-      label: 'Channel',
-      itemKey: 'channels'
-    },
-    {
-      label: 'Engagement Type',
-      itemKey: 'engagementTypes'
-    },
-    {
-      label: 'Labels',
-      itemKey: 'labels'
-    },
-    {
-      label: 'Environment',
-      itemKey: 'environments'
-    }
-  ]
-
-  filterTypes = filterTypes.map(filterType => ({
+  return filterTypes.map(filterType => ({
     ...filterType,
     options: filterOptions[filterType.itemKey as keyof FilterOptions]
   }))
+}
 
-  return filterTypes as FilterTypeOb[]
+export const getDefaultFilters = (): SelectedFilters => {
+  return {
+    products: [],
+    channels: [],
+    engagementTypes: [],
+    labels: [],
+    environments: []
+  }
 }

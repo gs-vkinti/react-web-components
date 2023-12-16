@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import { styles } from './styles'
+import { styles, popoverStyles } from './styles'
 
 import { FC, useState, MouseEvent } from 'react'
 import Popover from '@mui/material/Popover'
+import cx from 'classnames'
 
-import { ACTIVE_ENGAGEMENTS, SEARCH_BY_NAME } from '../../text'
+import { ACTIVE_ENGAGEMENTS, SEARCH_BY_NAME, SORT_BY } from '../../text'
+import { sortTypes } from '../const'
 
-import { SearchField } from '../../components'
+import { SearchField, Tooltip } from '../../components'
 import { FilterIcon, SortIcon } from '../../assets/icons'
 
 interface TitleBarProps {
@@ -14,22 +16,26 @@ interface TitleBarProps {
   setSearchText: (s: string) => void
   isSearching: boolean
   engagementCount: number
+  sortType: string
+  setSortType: (s: string) => void
   isFiltersApplied?: boolean
-  isSortApplied?: boolean
+  openFilterBar: boolean
+  setOpenFilterBar: (v: boolean) => void
 }
 
 const TitleBar: FC<TitleBarProps> = props => {
   const [anchorEl, setAnchorEl] = useState<null | Element>(null)
 
-  const open = Boolean(anchorEl)
+  const openPopover = (event: MouseEvent) => setAnchorEl(event.currentTarget)
 
-  const openPopover = (event: MouseEvent) => {
-    console.log(event.currentTarget)
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
+  const handleClose = () => setAnchorEl(null)
+
+  const sortIconCn = cx({ 'joe-title-bar__filters--icons-selected': Boolean(anchorEl) })
+  const filterIconCn = cx({
+    'joe-title-bar__filters--icons-selected': props.openFilterBar
+  })
+
+  const selectedSortTypeLabel = sortTypes.find(i => i.value === props.sortType)?.label || ''
 
   return (
     <div css={styles()}>
@@ -44,28 +50,67 @@ const TitleBar: FC<TitleBarProps> = props => {
             isBusy={props.isSearching}
           />
           <div className='joe-title-bar__filters--icons'>
-            <div>
-              {props.isSortApplied && <span />}
-              <SortIcon onClick={openPopover} />
-              <Popover
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left'
-                }}
+            <div className={sortIconCn}>
+              {Boolean(props.sortType) && <span />}
+
+              <Tooltip
+                content={
+                  <div style={{ textAlign: 'left', whiteSpace: 'nowrap' }}>
+                    <div>
+                      {SORT_BY}: {selectedSortTypeLabel}
+                    </div>
+                  </div>
+                }
+                disabled={!props.sortType}
               >
-                Hello
-              </Popover>
+                <div>
+                  <SortIcon onClick={openPopover} />
+                </div>
+              </Tooltip>
             </div>
-            <div>
+            <div className={filterIconCn}>
               {props.isFiltersApplied && <span />}
-              <FilterIcon />
+              <FilterIcon onClick={() => props.setOpenFilterBar(!props.openFilterBar)} />
             </div>
           </div>
         </div>
       </div>
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+      >
+        <div css={popoverStyles()}>
+          <div className='joe-sort-filter-popover'>
+            {sortTypes.map((sortType, index) => {
+              const itemCn = cx('joe-sort-filter-popover__item', {
+                'joe-sort-filter-popover__item--selected': sortType.value === props.sortType
+              })
+
+              return (
+                <div
+                  key={index}
+                  className={itemCn}
+                  onClick={() => {
+                    props.setSortType(sortType.value)
+                    handleClose()
+                  }}
+                >
+                  {sortType.label}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </Popover>
     </div>
   )
 }
