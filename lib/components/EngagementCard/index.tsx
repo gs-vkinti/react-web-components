@@ -1,45 +1,104 @@
 /** @jsxImportSource @emotion/react */
-import { styles } from './styles'
+import { styles, popoverStyles } from './styles'
 
-import { memo, FC } from 'react'
+import { FC, memo, useState } from 'react'
 import cx from 'classnames'
+import Popover from '@mui/material/Popover'
 
 import { EngagementCardProps } from '../../JOEngagement/JOEngagement.types'
+import { TickInCircleIcon } from '../../assets/icons'
+import { Tooltip, ListViewTooltip } from '../'
 
 const EngagementCard: FC<EngagementCardProps> = props => {
+  const [anchorEl, setAnchorEl] = useState<null | Element>(null)
+
   const engTypeCn = cx('joe-engagement-card__view--type', {
-    'joe-engagement-card__view--type-guide': props.type === 'guide'
+    'joe-engagement-card__view--type-guide': props.type === 'guide',
+    'joe-engagement-card__view--type-slider': props.type === 'slider',
+    'joe-engagement-card__view--type-dialog': props.type === 'dialog'
   })
+
+  const engagementCn = cx('joe-engagement-card', {
+    'joe-engagement-card__selected': props.isSelected
+  })
+
+  const engagementViewCn = cx('joe-engagement-card__view', {
+    'joe-engagement-card__view--selected': props.isSelected
+  })
+
+  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
 
   return (
     <div css={styles()}>
-      <div className='joe-engagement-card'>
-        <div className='joe-engagement-card__view'>
+      <div className={engagementCn} onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
+        <div className={engagementViewCn}>
           <div className={engTypeCn}>{props.type}</div>
+
           <img src={props.image} className='joe-engagement-card__view--image' />
+
+          {props.isSelected && (
+            <div className='joe-engagement-card__view--tick-icon'>
+              <TickInCircleIcon />
+            </div>
+          )}
         </div>
 
         <div className='joe-engagement-card__info'>
           <div className='joe-engagement-card__info--label'>{props.name}</div>
           <div className='joe-engagement-card__info--environments'>
-            {props.environments.map((environment: string, index: number) => (
-              <div key={index}>
-                {environment}{' '}
-                {index !== props.environments.length - 1 && (
-                  <div className='joe-engagement-card__info--environments-dot' />
-                )}
-              </div>
-            ))}
+            <div>{props.product}</div>
+            <div className='joe-engagement-card__info--environments-dot' />
+            <div>{props.channel}</div>
+            <div className='joe-engagement-card__info--environments-dot' />
+            <div> {props.environments.join(', ')} </div>
           </div>
           <div className='joe-engagement-card__info--labels'>
-            {props.labels.map((label: string, index: number) => (
+            {props.labels.slice(0, 2).map((label: string, index: number) => (
               <div key={index} className='joe-engagement-card__info--labels-chip'>
                 {label}
               </div>
             ))}
+
+            {props.labels.length > 2 && (
+              <Tooltip content={<ListViewTooltip items={props.labels.slice(2)} />}>
+                <div className='joe-engagement-card__info--labels-chip joe-engagement-card__info--labels-chip-additional'>
+                  + {props.labels.length - 2}
+                </div>
+              </Tooltip>
+            )}
           </div>
         </div>
       </div>
+
+      <Popover
+        sx={{
+          pointerEvents: 'none'
+        }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: 'center'
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'center'
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <div css={popoverStyles()}>
+          <div className='joe-engagement-card-popover'>Test</div>
+        </div>
+      </Popover>
     </div>
   )
 }

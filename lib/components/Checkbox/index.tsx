@@ -3,7 +3,8 @@ import style from './styles'
 
 import { FC } from 'react'
 import cx from 'classnames'
-import { Checkbox as MaterialCheckbox, FormControlLabel } from '@mui/material'
+import MaterialCheckbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
 
 import {
   CheckboxIcon,

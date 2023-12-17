@@ -10,6 +10,7 @@ import CheckboxDisabledIcon from './CheckboxDisabledIcon'
 import CheckboxCheckedIcon from './CheckboxCheckedIcon'
 import CheckboxCheckedDisabledIcon from './CheckboxCheckedDisabledIcon'
 import CheckboxIndeterminateIcon from './CheckboxIndeterminateIcon'
+import TickInCircleIcon from './TickInCircleIcon'
 
 export {
   CancelIcon,
@@ -23,5 +24,6 @@ export {
   CheckboxDisabledIcon,
   CheckboxCheckedIcon,
   CheckboxCheckedDisabledIcon,
-  CheckboxIndeterminateIcon
+  CheckboxIndeterminateIcon,
+  TickInCircleIcon
 }

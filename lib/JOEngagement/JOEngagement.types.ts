@@ -38,12 +38,8 @@ export interface FilterTypeOb {
   options: ProductOption[] | ChannelOption[] | EngagementTypeOption[] | LabelOption[] | EnvironmentOption[]
 }
 
-export interface EngagementCardProps {
-  type: string
-  name: string
-  environments: string[]
-  labels: string[]
-  image: string
+export interface EngagementCardProps extends EngagementOb {
+  isSelected: boolean
 }
 
 export interface SortTypeOption {
@@ -53,6 +49,10 @@ export interface SortTypeOption {
 
 export interface EngagementsListProps {
   openFilterBar: boolean
+  selectedEngagement: EngagementOb | null
+  setSelectedEngagement: (v: EngagementOb) => void
+  engagementsList: EngagementOb[]
+  loadingEngagementsList: boolean
 }
 
 export interface SelectedFilters {
@@ -60,5 +60,16 @@ export interface SelectedFilters {
   channels: string[]
   engagementTypes: string[]
   labels: string[]
+  environments: string[]
+}
+
+export interface EngagementOb {
+  id: string
+  type: string
+  name: string
+  labels: string[]
+  image: string
+  product: string
+  channel: string
   environments: string[]
 }

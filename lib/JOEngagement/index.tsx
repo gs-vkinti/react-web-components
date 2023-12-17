@@ -1,19 +1,19 @@
 // @ts-ignore
 import styles from './jo-engagement.scss?inline'
 
-import { useMemo, useState, useRef } from 'react'
+import { useMemo, useState, useRef, useEffect } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
 import isEqual from 'lodash/isEqual'
 
-import { getDefaultFilters, getFilterOptions } from './utils'
+import { getDefaultFilters, getFilterOptions, getMockEngagements } from './utils'
 
 import Header from './Header'
 import TitleBar from './TitleBar'
 import Filters from './Filters'
 import EngagementsList from './EngagementsList'
-import { SelectedFilters } from './JOEngagement.types'
+import { SelectedFilters, EngagementOb } from './JOEngagement.types'
 
 interface JOEngagementProps {
   container: any
@@ -28,6 +28,17 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
   const [sortType, setSortType] = useState<string>('')
   const [openFilterBar, setOpenFilterBar] = useState<boolean>(true)
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(getDefaultFilters())
+
+  const [selectedEngagement, setSelectedEngagement] = useState<EngagementOb | null>(null)
+  const [engagementsList, setEngagementsList] = useState<EngagementOb[]>([])
+
+  const [loadingEngagementsList, setLoadingEngagementsList] = useState<boolean>(false)
+
+  useEffect(() => {
+    setLoadingEngagementsList(true)
+    setEngagementsList(getMockEngagements())
+    setLoadingEngagementsList(false)
+  }, [])
 
   const isFiltersApplied = useMemo(() => {
     return !isEqual(getDefaultFilters(), selectedFilters)
@@ -72,7 +83,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
 
           <div className='px-jo-engagements__body'>
             <TitleBar
-              engagementCount={100}
+              engagementCount={engagementsList.length}
               searchText={searchText}
               setSearchText={setSearchText}
               isSearching={false}
@@ -90,7 +101,13 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               />
             )}
 
-            <EngagementsList openFilterBar={openFilterBar} />
+            <EngagementsList
+              openFilterBar={openFilterBar}
+              selectedEngagement={selectedEngagement}
+              setSelectedEngagement={setSelectedEngagement}
+              engagementsList={engagementsList}
+              loadingEngagementsList={loadingEngagementsList}
+            />
           </div>
         </div>
       </ThemeProvider>

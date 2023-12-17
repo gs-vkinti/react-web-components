@@ -1,8 +1,8 @@
 import { FC, memo } from 'react'
 
 interface ListViewTooltipProps {
-  items: string[]
-  defaultText: string
+  items?: string[]
+  defaultText?: string
 }
 
 const ListViewTooltip: FC<ListViewTooltipProps> = (props: ListViewTooltipProps) => {

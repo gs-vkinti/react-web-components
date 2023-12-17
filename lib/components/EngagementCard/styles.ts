@@ -6,15 +6,33 @@ import {
   RICH_GRAY_10,
   RICH_GRAY_60,
   BELL_BLUE_40,
-  BELL_BLUE_20
+  BELL_BLUE_20,
+  ROYAL_BLUE_10,
+  ROYAL_BLUE_70,
+  BRONZE_BROWN_40,
+  BRONZE_BROWN_20,
+  BRONZE_BROWN_90,
+  LAVENDER_PURPLE_40,
+  LAVENDER_PURPLE_20
 } from '../../styles/colors'
+import { POPOVER_SHADOW } from '../../styles/typography'
 
 export const styles = () => css`
   .joe-engagement-card {
-    width: 368px;
+    width: 366px;
     height: 288px;
     border: solid 1px ${RICH_GRAY_30};
     cursor: pointer;
+    border-radius: 4px;
+
+    &__skeleton {
+      cursor: default;
+    }
+
+    &__selected {
+      width: 364px;
+      border: solid 2px ${ROYAL_BLUE_70};
+    }
 
     &__view {
       height: 180px;
@@ -24,6 +42,16 @@ export const styles = () => css`
       align-items: center;
       background-color: ${RICH_GRAY_10};
       border-bottom: solid 1px ${RICH_GRAY_30};
+
+      &--selected {
+        background-color: ${ROYAL_BLUE_10};
+      }
+
+      &--tick-icon {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
 
       &--type {
         position: absolute;
@@ -43,6 +71,18 @@ export const styles = () => css`
           border: solid 1px ${BELL_BLUE_40};
           background-color: ${BELL_BLUE_20};
           color: #3c4abd;
+        }
+
+        &-slider {
+          border: solid 1px ${BRONZE_BROWN_40};
+          background-color: ${BRONZE_BROWN_20};
+          color: ${BRONZE_BROWN_90};
+        }
+
+        &-dialog {
+          border: solid 1px ${LAVENDER_PURPLE_40};
+          background-color: ${LAVENDER_PURPLE_20};
+          color: #712bba;
         }
       }
 
@@ -100,23 +140,42 @@ export const styles = () => css`
         gap: 8px;
 
         &-chip {
-          flex-grow: 0;
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-          align-items: center;
           padding: 0 6px;
+
+          display: block;
+          max-width: calc(40%);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
 
           font-size: 11px;
           font-weight: normal;
           line-height: 1.45;
-          letter-spacing: normal;
           text-align: left;
           color: ${RICH_GRAY_90};
           background-color: ${RICH_GRAY_30};
           border-radius: 4px;
+
+          &-additional {
+            display: flex;
+            font-size: 11px;
+            font-weight: normal;
+            line-height: 1.45;
+            text-align: left;
+            color: ${ROYAL_BLUE_70};
+          }
         }
       }
     }
+  }
+`
+
+export const popoverStyles = () => css`
+  .joe-engagement-card-popover {
+    width: 432px;
+    height: 364px;
+    border-radius: 8px;
+    box-shadow: ${POPOVER_SHADOW};
+    background-color: #fff;
   }
 `
