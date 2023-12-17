@@ -93,6 +93,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               setOpenFilterBar={setOpenFilterBar}
               isFiltersApplied={isFiltersApplied}
             />
+
             {openFilterBar && (
               <Filters
                 filterOptions={getFilterOptions()}

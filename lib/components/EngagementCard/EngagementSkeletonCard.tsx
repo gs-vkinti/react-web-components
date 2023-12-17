@@ -5,9 +5,11 @@ import { memo } from 'react'
 import Skeleton from '@mui/material/Skeleton'
 import Stack from '@mui/material/Stack'
 
+import { EngagementCardProps } from '../../JOEngagement/JOEngagement.types'
+
 const EngagementSkeletonCard = () => {
   return (
-    <div css={styles()}>
+    <div css={styles({} as EngagementCardProps)}>
       <div className='joe-engagement-card joe-engagement-card__skeleton'>
         <div className='joe-engagement-card__view'>
           <Stack spacing={2} direction='row' alignItems='baseline'>

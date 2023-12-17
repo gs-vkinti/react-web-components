@@ -68,8 +68,12 @@ export interface EngagementOb {
   type: string
   name: string
   labels: string[]
-  image: string
+  images: string[]
   product: string
   channel: string
   environments: string[]
 }
+
+export interface HoverCardProps extends EngagementCardProps {}
+
+export interface AutoplayCarouselProps extends HoverCardProps {}

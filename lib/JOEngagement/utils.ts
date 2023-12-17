@@ -2,7 +2,7 @@ import range from 'lodash/range'
 import random from 'lodash/random'
 import uniqueId from 'lodash/uniqueId'
 
-import { products, channels, engagementTypes, labels, environments } from './mock'
+import { products, channels, engagementTypes, labels, environments, engagementTypeImages } from './mock'
 
 import { FilterOptions, FilterTypeOb, SelectedFilters, EngagementOb } from './JOEngagement.types'
 import { filterTypes } from './const'
@@ -55,7 +55,7 @@ export const getMockEngagements = (): EngagementOb[] => {
           type: engagementType,
           name: `Engagement ${engagementType} - ${i + 1}`,
           labels: [...labelsList].slice(0, random(0, labelsList.length)),
-          image: '',
+          images: engagementTypeImages[engagementType],
           product: productName,
           channel: channelLabels[random(0, channelLabels.length - 1)],
           environments: [...environmentLabels].slice(0, random(0, environmentLabels.length))

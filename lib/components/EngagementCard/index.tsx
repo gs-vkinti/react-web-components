@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { styles, popoverStyles } from './styles'
+import { styles } from './styles'
 
 import { FC, memo, useState } from 'react'
 import cx from 'classnames'
@@ -8,6 +8,7 @@ import Popover from '@mui/material/Popover'
 import { EngagementCardProps } from '../../JOEngagement/JOEngagement.types'
 import { TickInCircleIcon } from '../../assets/icons'
 import { Tooltip, ListViewTooltip } from '../'
+import HoverCard from './HoverCard'
 
 const EngagementCard: FC<EngagementCardProps> = props => {
   const [anchorEl, setAnchorEl] = useState<null | Element>(null)
@@ -37,12 +38,12 @@ const EngagementCard: FC<EngagementCardProps> = props => {
   const open = Boolean(anchorEl)
 
   return (
-    <div css={styles()}>
+    <div css={styles(props)}>
       <div className={engagementCn} onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}>
         <div className={engagementViewCn}>
           <div className={engTypeCn}>{props.type}</div>
 
-          <img src={props.image} className='joe-engagement-card__view--image' />
+          <img src={props.images[0]} className='joe-engagement-card__view--image' />
 
           {props.isSelected && (
             <div className='joe-engagement-card__view--tick-icon'>
@@ -95,9 +96,7 @@ const EngagementCard: FC<EngagementCardProps> = props => {
         onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <div css={popoverStyles()}>
-          <div className='joe-engagement-card-popover'>Test</div>
-        </div>
+        <HoverCard {...props} />
       </Popover>
     </div>
   )
