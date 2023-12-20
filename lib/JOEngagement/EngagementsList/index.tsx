@@ -18,6 +18,7 @@ export default function EngagementsList(props: EngagementsListProps) {
                   <EngagementCard
                     isSelected={props.selectedEngagement?.id === engagement.id}
                     {...engagement}
+                    openPreview={props.openPreview}
                   />
                 </div>
               )

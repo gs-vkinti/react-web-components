@@ -40,6 +40,7 @@ export interface FilterTypeOb {
 
 export interface EngagementCardProps extends EngagementOb {
   isSelected: boolean
+  openPreview: (id: string) => void
 }
 
 export interface SortTypeOption {
@@ -53,6 +54,7 @@ export interface EngagementsListProps {
   setSelectedEngagement: (v: EngagementOb) => void
   engagementsList: EngagementOb[]
   loadingEngagementsList: boolean
+  openPreview: (id: string) => void
 }
 
 export interface SelectedFilters {
@@ -72,12 +74,11 @@ export interface EngagementOb {
   product: string
   channel: string
   environments: string[]
-  setViewType: (type: string) => void
 }
 
 export interface EngagementPreviewProps {
-  engagement: object
-  setViewType: (type: string) => void
+  engagement: EngagementOb
+  exitPreview: () => void
 }
 
 export interface PaginationProps {

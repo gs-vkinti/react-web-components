@@ -4,13 +4,13 @@ import { ArrowLeftIcon } from '../../assets/icons'
 type props = {
   title: string
   description: string
-  setViewType: (type: string) => void
+  exitPreview: () => void
 }
 
-const TitleBar: FC<props> = ({ title, description, setViewType }) => {
+const TitleBar: FC<props> = ({ title, description, exitPreview }) => {
   return (
     <div className='joe-title-bar'>
-      <div className='joe-title-bar__back-icon' onClick={() => setViewType('list')}>
+      <div className='joe-title-bar__back-icon' onClick={exitPreview}>
         <ArrowLeftIcon />
       </div>
 

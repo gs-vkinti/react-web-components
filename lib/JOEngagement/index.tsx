@@ -26,7 +26,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
   console.log('JOEngagement props', props)
   const containerRef = useRef<HTMLDivElement>(null)
   const [searchText, setSearchText] = useState<string>('')
-  const [viewType, setViewType] = useState<string>('list')
+  const [previewSelectedEngagement, setPreviewSelectedEngagement] = useState<EngagementOb | null>(null)
   const [sortType, setSortType] = useState<string>('')
   const [openFilterBar, setOpenFilterBar] = useState<boolean>(true)
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(getDefaultFilters())
@@ -75,6 +75,14 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
       }
     }
   })
+  const showEngagementListView = () => {
+    setPreviewSelectedEngagement(null)
+  }
+  const showEngagementPreview = (id: string) => {
+    const engagement = engagementsList.find(v => v.id === id) || null
+    console.log('previw: ', id, engagement)
+    setPreviewSelectedEngagement(engagement)
+  }
 
   return (
     <CacheProvider value={cache}>
@@ -84,33 +92,43 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
           <Header onClose={props.cancelAction} />
 
           <div className='px-jo-engagements__body'>
-            <TitleBar
-              engagementCount={engagementsList.length}
-              searchText={searchText}
-              setSearchText={setSearchText}
-              isSearching={false}
-              sortType={sortType}
-              setSortType={setSortType}
-              openFilterBar={openFilterBar}
-              setOpenFilterBar={setOpenFilterBar}
-              isFiltersApplied={isFiltersApplied}
-            />
+            {!previewSelectedEngagement ? (
+              <>
+                <TitleBar
+                  engagementCount={engagementsList.length}
+                  searchText={searchText}
+                  setSearchText={setSearchText}
+                  isSearching={false}
+                  sortType={sortType}
+                  setSortType={setSortType}
+                  openFilterBar={openFilterBar}
+                  setOpenFilterBar={setOpenFilterBar}
+                  isFiltersApplied={isFiltersApplied}
+                />
 
-            {openFilterBar && (
-              <Filters
-                filterOptions={getFilterOptions()}
-                selectedFilters={selectedFilters}
-                setSelectedFilters={setSelectedFilters}
+                {openFilterBar && (
+                  <Filters
+                    filterOptions={getFilterOptions()}
+                    selectedFilters={selectedFilters}
+                    setSelectedFilters={setSelectedFilters}
+                  />
+                )}
+
+                <EngagementsList
+                  openFilterBar={openFilterBar}
+                  selectedEngagement={selectedEngagement}
+                  setSelectedEngagement={setSelectedEngagement}
+                  engagementsList={engagementsList}
+                  loadingEngagementsList={loadingEngagementsList}
+                  openPreview={showEngagementPreview}
+                />
+              </>
+            ) : (
+              <EngagementPreview
+                engagement={previewSelectedEngagement}
+                exitPreview={showEngagementListView}
               />
             )}
-
-            <EngagementsList
-              openFilterBar={openFilterBar}
-              selectedEngagement={selectedEngagement}
-              setSelectedEngagement={setSelectedEngagement}
-              engagementsList={engagementsList}
-              loadingEngagementsList={loadingEngagementsList}
-            />
           </div>
         </div>
       </ThemeProvider>
