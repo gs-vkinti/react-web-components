@@ -10,7 +10,7 @@ const Slideshow: FC<props> = ({ slides }) => {
       <div className='joe-slideshow__slide'>
         <img alt='image' src={slides[page]} />
       </div>
-      <Pagination page={page} count={slides.length} onChange={(e, p) => setPage(p)} />
+      <Pagination page={page} count={slides.length} onChange={(_, p) => setPage(p)} />
     </div>
   )
 }
