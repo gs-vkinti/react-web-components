@@ -15,9 +15,9 @@ const TitleBar: FC<props> = ({ title, description, exitPreview }) => {
       </div>
 
       <div className='joe-title-bar__content'>
-        <div className='joe-title-bar__content__title'>{title}</div>
+        <div className='joe-title-bar__content--title'>{title}</div>
 
-        <div className='joe-title-bar__content__description'>{description}</div>
+        <div className='joe-title-bar__content--description'>{description}</div>
       </div>
     </div>
   )

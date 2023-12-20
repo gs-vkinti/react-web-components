@@ -82,9 +82,9 @@ export interface EngagementPreviewProps {
 }
 
 export interface PaginationProps {
-  activePage: number
-  countPage: number
-  setActivePage: (value: number) => void
+  page: number
+  count: number
+  onChange: (e: React.ChangeEvent<unknown>, value: number) => void
 }
 
 export interface HoverCardProps extends EngagementCardProps {}
