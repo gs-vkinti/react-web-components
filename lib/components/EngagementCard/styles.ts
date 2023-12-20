@@ -199,7 +199,7 @@ export const popoverStyles = () => css`
     border-radius: 8px;
     box-shadow: ${POPOVER_SHADOW};
     background-color: #fff;
-
+    overflow: hidden;
     &__view {
       height: 258px;
       border-bottom: solid 1px #e6e9ec;
@@ -259,6 +259,9 @@ export const popoverStyles = () => css`
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+      }
+      &--button {
+        margin-top: 16px;
       }
     }
   }

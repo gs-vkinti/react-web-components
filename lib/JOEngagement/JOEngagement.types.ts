@@ -79,6 +79,7 @@ export interface EngagementOb {
 export interface EngagementPreviewProps {
   engagement: EngagementOb
   exitPreview: () => void
+  selectEngagement: () => void
 }
 
 export interface PaginationProps {

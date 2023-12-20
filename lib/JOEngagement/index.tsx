@@ -15,6 +15,8 @@ import Filters from './Filters'
 import EngagementsList from './EngagementsList'
 import EngagementPreview from './EngagementPreview'
 import { SelectedFilters, EngagementOb } from './JOEngagement.types'
+import { RICH_GRAY_0, RICH_GRAY_40, ROYAL_BLUE_70 } from '../styles/colors'
+import { createColors } from 'vitest/utils.js'
 
 interface JOEngagementProps {
   container: any
@@ -57,6 +59,16 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
   )
 
   const horizonTheme = createTheme({
+    typography: {
+      fontFamily: 'Noto Sans, sans-serif',
+      fontSize: 14,
+      fontWeightMedium: 600
+    },
+    palette: {
+      primary: {
+        main: ROYAL_BLUE_70
+      }
+    },
     components: {
       MuiPopover: {
         defaultProps: {
@@ -72,15 +84,37 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
         defaultProps: {
           container: () => containerRef.current
         }
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: ({ ownerState }) => ({
+            borderRadius: 100,
+            padding: '4px 20px',
+            textTransform: 'none',
+            lineHeight: 1.5,
+            borderColor: RICH_GRAY_40,
+            '&:hover': {
+              backgroundColor: ownerState.variant === 'outlined' ? RICH_GRAY_0 : ROYAL_BLUE_70,
+              borderColor: RICH_GRAY_40
+            }
+          })
+        },
+        defaultProps: {
+          disableRipple: true,
+          disableFocusRipple: true,
+          disableElevation: true,
+          disableTouchRipple: true
+        }
       }
     }
   })
+
   const showEngagementListView = () => {
     setPreviewSelectedEngagement(null)
   }
+
   const showEngagementPreview = (id: string) => {
     const engagement = engagementsList.find(v => v.id === id) || null
-    console.log('previw: ', id, engagement)
     setPreviewSelectedEngagement(engagement)
   }
 
@@ -127,6 +161,10 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               <EngagementPreview
                 engagement={previewSelectedEngagement}
                 exitPreview={showEngagementListView}
+                selectEngagement={() => {
+                  setSelectedEngagement(previewSelectedEngagement)
+                  showEngagementListView()
+                }}
               />
             )}
           </div>
