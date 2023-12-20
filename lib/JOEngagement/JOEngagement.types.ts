@@ -40,7 +40,7 @@ export interface FilterTypeOb {
 
 export interface EngagementCardProps extends EngagementOb {
   isSelected: boolean
-  openPreview: (id: string) => void
+  openPreview: () => void
 }
 
 export interface SortTypeOption {
@@ -54,7 +54,7 @@ export interface EngagementsListProps {
   setSelectedEngagement: (v: EngagementOb) => void
   engagementsList: EngagementOb[]
   loadingEngagementsList: boolean
-  openPreview: (id: string) => void
+  openPreview: (engagement: EngagementOb) => void
 }
 
 export interface SelectedFilters {

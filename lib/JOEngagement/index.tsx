@@ -16,7 +16,6 @@ import EngagementsList from './EngagementsList'
 import EngagementPreview from './EngagementPreview'
 import { SelectedFilters, EngagementOb } from './JOEngagement.types'
 import { RICH_GRAY_0, RICH_GRAY_40, ROYAL_BLUE_70 } from '../styles/colors'
-import { createColors } from 'vitest/utils.js'
 
 interface JOEngagementProps {
   container: any
@@ -113,11 +112,6 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
     setPreviewSelectedEngagement(null)
   }
 
-  const showEngagementPreview = (id: string) => {
-    const engagement = engagementsList.find(v => v.id === id) || null
-    setPreviewSelectedEngagement(engagement)
-  }
-
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={horizonTheme}>
@@ -154,7 +148,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
                   setSelectedEngagement={setSelectedEngagement}
                   engagementsList={engagementsList}
                   loadingEngagementsList={loadingEngagementsList}
-                  openPreview={showEngagementPreview}
+                  openPreview={setPreviewSelectedEngagement}
                 />
               </>
             ) : (

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { FC } from 'react'
-import { range, set } from 'lodash'
+import { range } from 'lodash'
 import cn from 'classnames'
 import ChevronLeft from '../../assets/icons/ChevronLeft'
 import ChevronRight from '../../assets/icons/ChevronRight'

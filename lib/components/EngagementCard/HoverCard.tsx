@@ -32,12 +32,7 @@ const HoverCard: FC<HoverCardProps> = props => {
           </div>
 
           <div className='joe-engagement-card-popover__info--button'>
-            <Button
-              variant='contained'
-              onClick={() => {
-                props.openPreview(props.id)
-              }}
-            >
+            <Button variant='contained' onClick={props.openPreview}>
               {PREVIEW} / {EDIT}
             </Button>
           </div>
