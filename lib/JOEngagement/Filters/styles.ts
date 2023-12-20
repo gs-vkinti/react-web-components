@@ -9,5 +9,6 @@ export const styles = () => css`
     gap: 16px;
     padding: 16px 0;
     border-bottom: 1px solid ${RICH_GRAY_40};
+    overflow: auto;
   }
 `

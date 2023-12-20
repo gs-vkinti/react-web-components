@@ -38,3 +38,10 @@ export const FRESH_GREEN_70 = '#13ad68'
 
 export const BELL_BLUE_20 = '#ebecfa'
 export const BELL_BLUE_40 = '#b8bdeb'
+
+export const BRONZE_BROWN_20 = '#eee5e2'
+export const BRONZE_BROWN_40 = '#d6c1ba'
+export const BRONZE_BROWN_90 = '#6a4a3f'
+
+export const LAVENDER_PURPLE_20 = '#f0e5fa'
+export const LAVENDER_PURPLE_40 = '#dac0f2'

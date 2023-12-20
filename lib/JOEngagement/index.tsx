@@ -1,22 +1,20 @@
 // @ts-ignore
 import styles from './jo-engagement.scss?inline'
-// @ts-ignore
-import tippy_styles from 'tippy.js/dist/tippy.css?inline'
 
-import { useMemo, useState, useRef } from 'react'
-
+import { useMemo, useState, useRef, useEffect } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
+import isEqual from 'lodash/isEqual'
 
-import { getFilterOptions } from './utils'
+import { getDefaultFilters, getFilterOptions, getMockEngagements } from './utils'
 
 import Header from './Header'
 import TitleBar from './TitleBar'
 import Filters from './Filters'
 import EngagementsList from './EngagementsList'
 import EngagementPreview from './EngagementPreview'
+import { SelectedFilters, EngagementOb } from './JOEngagement.types'
 
 interface JOEngagementProps {
   container: any
@@ -29,6 +27,24 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
   const containerRef = useRef<HTMLDivElement>(null)
   const [searchText, setSearchText] = useState<string>('')
   const [viewType, setViewType] = useState<string>('list')
+  const [sortType, setSortType] = useState<string>('')
+  const [openFilterBar, setOpenFilterBar] = useState<boolean>(true)
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(getDefaultFilters())
+
+  const [selectedEngagement, setSelectedEngagement] = useState<EngagementOb | null>(null)
+  const [engagementsList, setEngagementsList] = useState<EngagementOb[]>([])
+
+  const [loadingEngagementsList, setLoadingEngagementsList] = useState<boolean>(false)
+
+  useEffect(() => {
+    setLoadingEngagementsList(true)
+    setEngagementsList(getMockEngagements())
+    setLoadingEngagementsList(false)
+  }, [])
+
+  const isFiltersApplied = useMemo(() => {
+    return !isEqual(getDefaultFilters(), selectedFilters)
+  }, [selectedFilters])
 
   const cache = useMemo(
     () =>
@@ -63,29 +79,38 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={horizonTheme}>
-        <style type='text/css'>
-          {styles}
-          {tippy_styles}
-        </style>
+        <style type='text/css'>{styles}</style>
         <div className='px-jo-engagements' ref={containerRef}>
           <Header onClose={props.cancelAction} />
 
           <div className='px-jo-engagements__body'>
-            {viewType === 'list' ? (
-              <>
-                <TitleBar
-                  engagementCount={100}
-                  searchText={searchText}
-                  setSearchText={setSearchText}
-                  isSearching={false}
-                />
-                <Filters filterOptions={getFilterOptions()} />
+            <TitleBar
+              engagementCount={engagementsList.length}
+              searchText={searchText}
+              setSearchText={setSearchText}
+              isSearching={false}
+              sortType={sortType}
+              setSortType={setSortType}
+              openFilterBar={openFilterBar}
+              setOpenFilterBar={setOpenFilterBar}
+              isFiltersApplied={isFiltersApplied}
+            />
 
-                <EngagementsList setViewType={setViewType} />
-              </>
-            ) : (
-              <EngagementPreview engagement={{}} setViewType={setViewType} />
+            {openFilterBar && (
+              <Filters
+                filterOptions={getFilterOptions()}
+                selectedFilters={selectedFilters}
+                setSelectedFilters={setSelectedFilters}
+              />
             )}
+
+            <EngagementsList
+              openFilterBar={openFilterBar}
+              selectedEngagement={selectedEngagement}
+              setSelectedEngagement={setSelectedEngagement}
+              engagementsList={engagementsList}
+              loadingEngagementsList={loadingEngagementsList}
+            />
           </div>
         </div>
       </ThemeProvider>

@@ -1,7 +1,3 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
-/// <reference types="vite-plugin-svgr/client" />
-
 import { resolve } from 'path'
 import { ConfigEnv, defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
