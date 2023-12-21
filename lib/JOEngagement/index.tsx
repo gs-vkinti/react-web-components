@@ -54,6 +54,44 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
         })
   }, [engagementsList, searchText])
 
+  //Todo: update when we get more specific data about engagement object
+  const filteredEngagements = useMemo(() => {
+    if (!isFiltersApplied) return searchedEngagements
+    console.log({ selectedFilters })
+    return searchedEngagements.filter(engagement => {
+      let result = true
+      if (selectedFilters.products.length)
+        result =
+          result &&
+          !!selectedFilters.products.find(
+            product => product.toLowerCase() === engagement.product.toLowerCase()
+          )
+      if (selectedFilters.channels.length)
+        result =
+          result &&
+          !!selectedFilters.channels.find(
+            channel => channel.toLowerCase() === engagement.channel.toLowerCase()
+          )
+      if (selectedFilters.engagementTypes.length)
+        result =
+          result &&
+          !!selectedFilters.engagementTypes.find(type => type.toLowerCase() === engagement.type.toLowerCase())
+      if (selectedFilters.labels.length)
+        result =
+          result &&
+          !!selectedFilters.labels.find(label =>
+            engagement.labels.find(l => l.toLowerCase() === label.toLowerCase())
+          )
+      if (selectedFilters.environments.length)
+        result =
+          result &&
+          !!selectedFilters.environments.find(environment =>
+            engagement.environments.find(env => env.toLowerCase() === environment.toLowerCase())
+          )
+      return result
+    })
+  }, [isFiltersApplied, selectedFilters, searchedEngagements])
+
   const cache = useMemo(
     () =>
       createCache({
@@ -115,7 +153,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               openFilterBar={openFilterBar}
               selectedEngagement={selectedEngagement}
               setSelectedEngagement={setSelectedEngagement}
-              engagementsList={searchedEngagements}
+              engagementsList={filteredEngagements}
               loadingEngagementsList={loadingEngagementsList}
             />
           </div>
