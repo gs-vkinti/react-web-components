@@ -28,7 +28,7 @@ const Search: FC<SearchProps> = props => {
       value={text}
       onChange={e => onChangeSearch(e.target.value)}
       placeholder={props.placeholder || 'Search'}
-      endIcon={getIcon()}
+      endIcon={props.endIcon || getIcon()}
       onClickEndIcon={props.onClickEndIcon}
       onBlur={props.onBlur}
     />
