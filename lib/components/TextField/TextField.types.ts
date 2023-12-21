@@ -38,6 +38,4 @@ export interface TextFieldProps {
   required?: boolean
 }
 
-export interface SearchProps extends Omit<TextFieldProps, 'value'> {
-  isBusy?: boolean
-}
+export interface SearchProps extends Omit<TextFieldProps, 'value'> {}

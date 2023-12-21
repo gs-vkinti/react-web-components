@@ -14,7 +14,6 @@ import { FilterIcon, SortIcon } from '../../assets/icons'
 interface TitleBarProps {
   searchText: string
   setSearchText: (s: string) => void
-  isSearching: boolean
   engagementCount: number
   sortType: string
   setSortType: (s: string) => void
@@ -44,11 +43,7 @@ const TitleBar: FC<TitleBarProps> = props => {
           {ACTIVE_ENGAGEMENTS} ({props.engagementCount})
         </div>
         <div className='joe-title-bar__filters'>
-          <SearchField
-            onChange={props.setSearchText}
-            placeholder={SEARCH_BY_NAME}
-            isBusy={props.isSearching}
-          />
+          <SearchField onChange={props.setSearchText} placeholder={SEARCH_BY_NAME} />
           <div className='joe-title-bar__filters--icons'>
             <div className={sortIconCn}>
               {Boolean(props.sortType) && <span />}

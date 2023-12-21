@@ -44,6 +44,16 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
     return !isEqual(getDefaultFilters(), selectedFilters)
   }, [selectedFilters])
 
+  const searchedEngagements = useMemo(() => {
+    const search = searchText.toLowerCase()
+    return !search
+      ? engagementsList
+      : engagementsList.filter(e => {
+          const name = e.name.toLowerCase()
+          return name.includes(search)
+        })
+  }, [engagementsList, searchText])
+
   const cache = useMemo(
     () =>
       createCache({
@@ -86,7 +96,6 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               engagementCount={engagementsList.length}
               searchText={searchText}
               setSearchText={setSearchText}
-              isSearching={false}
               sortType={sortType}
               setSortType={setSortType}
               openFilterBar={openFilterBar}
@@ -106,7 +115,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               openFilterBar={openFilterBar}
               selectedEngagement={selectedEngagement}
               setSelectedEngagement={setSelectedEngagement}
-              engagementsList={engagementsList}
+              engagementsList={searchedEngagements}
               loadingEngagementsList={loadingEngagementsList}
             />
           </div>
