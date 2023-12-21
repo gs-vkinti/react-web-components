@@ -14,6 +14,7 @@ import TitleBar from './TitleBar'
 import Filters from './Filters'
 import EngagementsList from './EngagementsList'
 import { SelectedFilters, EngagementOb } from './JOEngagement.types'
+import EmptyEngagementsList from './EngagementsList/EmptyEngagementsList'
 
 interface JOEngagementProps {
   container: any
@@ -56,6 +57,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
 
   //Todo: update when we get more specific data about engagement object
   const filteredEngagements = useMemo(() => {
+    if (!openFilterBar) return searchedEngagements
     if (!isFiltersApplied) return searchedEngagements
     console.log({ selectedFilters })
     return searchedEngagements.filter(engagement => {
@@ -90,7 +92,7 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
           )
       return result
     })
-  }, [isFiltersApplied, selectedFilters, searchedEngagements])
+  }, [isFiltersApplied, selectedFilters, searchedEngagements, openFilterBar])
 
   const cache = useMemo(
     () =>
@@ -149,13 +151,17 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               />
             )}
 
-            <EngagementsList
-              openFilterBar={openFilterBar}
-              selectedEngagement={selectedEngagement}
-              setSelectedEngagement={setSelectedEngagement}
-              engagementsList={filteredEngagements}
-              loadingEngagementsList={loadingEngagementsList}
-            />
+            {filteredEngagements.length ? (
+              <EngagementsList
+                openFilterBar={openFilterBar}
+                selectedEngagement={selectedEngagement}
+                setSelectedEngagement={setSelectedEngagement}
+                engagementsList={filteredEngagements}
+                loadingEngagementsList={loadingEngagementsList}
+              />
+            ) : (
+              <EmptyEngagementsList openFilterBar={openFilterBar} />
+            )}
           </div>
         </div>
       </ThemeProvider>
