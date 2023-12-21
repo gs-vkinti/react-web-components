@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import { RICH_GRAY_20, RICH_GRAY_40, RICH_GRAY_60 } from '../styles/colors'
+import { IMAGE_SHADOW } from '../styles/typography'
 
 const styles = () => {
   return css`
@@ -28,11 +29,9 @@ const styles = () => {
         display: flex;
         align-items: center;
         justify-content: center;
-        > img {
+        img {
           display: block;
-          height: 150px;
-          width: 220px;
-          border: 1px solid blueviolet;
+          box-shadow: ${IMAGE_SHADOW};
         }
       }
       &--title {

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 
 import { RICH_GRAY_20, RICH_GRAY_40, RICH_GRAY_60, RICH_GRAY_70 } from '../../styles/colors'
+import { IMAGE_SHADOW } from '../../styles/typography'
 
 export const styles = () => css`
   .joe-preview {
@@ -92,6 +93,9 @@ export const styles = () => css`
       display: flex;
       align-items: center;
       justify-content: center;
+      img {
+        box-shadow: ${IMAGE_SHADOW};
+      }
     }
   }
 `

@@ -16,7 +16,7 @@ import {
   LAVENDER_PURPLE_20,
   RICH_GRAY_40
 } from '../../styles/colors'
-import { POPOVER_SHADOW } from '../../styles/typography'
+import { IMAGE_SHADOW, POPOVER_SHADOW } from '../../styles/typography'
 import { EngagementCardProps, AutoplayCarouselProps } from '../../JOEngagement/JOEngagement.types'
 
 const getImageWidthHeight = ({ type, isHover = false }: { type: string; isHover: boolean }) => {
@@ -288,6 +288,7 @@ export const autoplayCarousel = (props: AutoplayCarouselProps) => {
             width: ${imageWidth}px;
             height: ${imageHeight}px;
             display: inline-block;
+            box-shadow: ${IMAGE_SHADOW};
           }
         }
       }
