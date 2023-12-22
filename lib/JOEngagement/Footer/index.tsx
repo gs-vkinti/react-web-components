@@ -7,7 +7,7 @@ type props = { action: () => void; secondaryAction: () => void }
 const Footer: FC<props> = props => {
   return (
     <div css={styles()}>
-      <div className='joe-footer'>
+      <div className='joe-preview__footer'>
         <Button variant='outlined' onClick={props.secondaryAction}>
           {CANCEL}
         </Button>

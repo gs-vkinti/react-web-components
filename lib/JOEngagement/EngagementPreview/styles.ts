@@ -40,40 +40,39 @@ export const styles = () => css`
         justify-content: center;
       }
     }
-    &__content {
+    &__body {
       margin-top: 24px;
       display: flex;
       flex-direction: column;
       gap: 24px;
       align-items: center;
-
-      &__config {
-        line-height: 1.5;
+    }
+    &__config {
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      &--title {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      &--row {
+        display: flex;
+        justify-content: flex-start;
+        gap: 48px;
+      }
+      &--field {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        &__title {
-          font-size: 16px;
+
+        &__name {
+          font-size: 14px;
           font-weight: 600;
         }
-        &__row {
-          display: flex;
-          justify-content: flex-start;
-          gap: 48px;
-        }
-        &__field {
-          display: flex;
-          flex-direction: column;
-
-          &--name {
-            font-size: 14px;
-            font-weight: 600;
-          }
-          &--value {
-            color: ${RICH_GRAY_70};
-            font-size: 14px;
-            font-weight: 400;
-          }
+        &__value {
+          color: ${RICH_GRAY_70};
+          font-size: 14px;
+          font-weight: 400;
         }
       }
     }

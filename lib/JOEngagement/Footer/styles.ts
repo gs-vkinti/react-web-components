@@ -3,7 +3,7 @@ import { RICH_GRAY_30 } from '../../styles/colors'
 
 export const styles = () => {
   return css`
-    .joe-footer {
+    .joe-preview__footer {
       border-top: 1px solid ${RICH_GRAY_30};
       position: absolute;
       bottom: 0;

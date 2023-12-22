@@ -2,9 +2,9 @@
 import { styles } from './styles'
 
 import { FC, memo, useState } from 'react'
+import Popover from '@mui/material/Popover'
 import cx from 'classnames'
 
-import Popover from '@mui/material/Popover'
 import { EngagementCardProps } from '../../JOEngagement/JOEngagement.types'
 import { TickInCircleIcon } from '../../assets/icons'
 import { Tooltip, ListViewTooltip } from '../'

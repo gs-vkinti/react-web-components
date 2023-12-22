@@ -6,6 +6,7 @@ import { EngagementPreviewProps } from '../JOEngagement.types'
 import Footer from '../Footer'
 import TitleBar from './titlebar'
 import Slideshow from './slideshow'
+import { FROM, QUALIFICATION_RULE, SCHEDULE, THROTTLING, TIMEZONE, TO } from '../../text'
 
 const EngagementPreview: FC<EngagementPreviewProps> = ({ engagement, exitPreview, selectEngagement }) => {
   return (
@@ -18,40 +19,38 @@ const EngagementPreview: FC<EngagementPreviewProps> = ({ engagement, exitPreview
               step to it.'
             exitPreview={exitPreview}
           />
-          <div className='joe-preview__content'>
+          <div className='joe-preview__body'>
             <Slideshow slides={engagement.images} />
-            <div className='joe-preview__content__config'>
-              <div className='joe-preview__content__config__title'>Schedule</div>
-              <div className='joe-preview__content__config__row'>
-                <div className='joe-preview__content__config__field'>
-                  <div className='joe-preview__content__config__field--name'>Timezone</div>
-                  <div className='joe-preview__content__config__field--value'>America/Los Angeles</div>
+            <div className='joe-preview__config'>
+              <div className='joe-preview__config--title'>{SCHEDULE}</div>
+              <div className='joe-preview__config--row'>
+                <div className='joe-preview__config--field'>
+                  <div className='joe-preview__config--field__name'>{TIMEZONE}</div>
+                  <div className='joe-preview__config--field__value'>America/Los Angeles</div>
                 </div>
-                <div className='joe-preview__content__config__field'>
-                  <div className='joe-preview__content__config__field--name'>From</div>
-                  <div className='joe-preview__content__config__field--value'>04/04/2023 • 12:00 AM</div>
+                <div className='joe-preview__config--field'>
+                  <div className='joe-preview__config--field__name'>{FROM}</div>
+                  <div className='joe-preview__config--field__value'>04/04/2023 • 12:00 AM</div>
                 </div>
-                <div className='joe-preview__content__config__field'>
-                  <div className='joe-preview__content__config__field--name'>To</div>
-                  <div className='joe-preview__content__config__field--value'>04/05/2023 • 12:00 AM</div>
+                <div className='joe-preview__config--field'>
+                  <div className='joe-preview__config--field__name'>{TO}</div>
+                  <div className='joe-preview__config--field__value'>04/05/2023 • 12:00 AM</div>
                 </div>
               </div>
 
-              <div className='joe-preview__content__config__row'>
-                <div className='joe-preview__content__config__field'>
-                  <div className='joe-preview__content__config__field--name'>Qualification Rule</div>
-                  <div className='joe-preview__content__config__field--value'>
+              <div className='joe-preview__config--row'>
+                <div className='joe-preview__config--field'>
+                  <div className='joe-preview__config--field__name'>{QUALIFICATION_RULE}</div>
+                  <div className='joe-preview__config--field__value'>
                     Once per visit : The user will see the engagement a single time across any number of
                     visits under the specified date range.
                   </div>
                 </div>
               </div>
-              <div className='joe-preview__content__config__row'>
-                <div className='joe-preview__content__config__field'>
-                  <div className='joe-preview__content__config__field--name'>Throttling</div>
-                  <div className='joe-preview__content__config__field--value'>
-                    No throttling settings applied.
-                  </div>
+              <div className='joe-preview__config--row'>
+                <div className='joe-preview__config--field'>
+                  <div className='joe-preview__config--field__name'>{THROTTLING}</div>
+                  <div className='joe-preview__config--field__value'>No throttling settings applied.</div>
                 </div>
               </div>
             </div>

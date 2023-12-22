@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
-
 import { FC } from 'react'
 import { range } from 'lodash'
 import cn from 'classnames'
-import ChevronLeft from '../../assets/icons/ChevronLeft'
-import ChevronRight from '../../assets/icons/ChevronRight'
+
 import styles from './styles'
 import { RICH_GRAY_50, RICH_GRAY_60 } from '../../styles/colors'
 import { PaginationProps } from '../../JOEngagement/JOEngagement.types'
+import { ChevronLeft, ChevronRight } from '../../assets/icons/'
 
 const Pagination: FC<PaginationProps> = ({ page, count, onChange }) => {
   const rightActive = page !== count

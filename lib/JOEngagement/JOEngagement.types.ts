@@ -57,6 +57,14 @@ export interface EngagementsListProps {
   openPreview: (engagement: EngagementOb) => void
 }
 
+export interface EngagementsListViewProps {
+  engagementsList: EngagementOb[]
+  selectedEngagement: EngagementOb | null
+  setSelectedEngagement: (engagement: EngagementOb) => void
+  loadingEngagementsList: boolean
+  setPreviewSelectedEngagement: (engagement: EngagementOb) => void
+}
+
 export interface SelectedFilters {
   products: string[]
   channels: string[]

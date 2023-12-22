@@ -5,17 +5,14 @@ import { useMemo, useState, useRef, useEffect } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
-import isEqual from 'lodash/isEqual'
 
-import { getDefaultFilters, getFilterOptions, getMockEngagements } from './utils'
+import { getMockEngagements } from './utils'
+import { EngagementOb } from './JOEngagement.types'
+import { RICH_GRAY_0, RICH_GRAY_40, ROYAL_BLUE_70 } from '../styles/colors'
 
 import Header from './Header'
-import TitleBar from './TitleBar'
-import Filters from './Filters'
-import EngagementsList from './EngagementsList'
 import EngagementPreview from './EngagementPreview'
-import { SelectedFilters, EngagementOb } from './JOEngagement.types'
-import { RICH_GRAY_0, RICH_GRAY_40, ROYAL_BLUE_70 } from '../styles/colors'
+import EngagementsListView from './EngagementsListView'
 
 interface JOEngagementProps {
   container: any
@@ -26,15 +23,10 @@ interface JOEngagementProps {
 export default function JOEngagement({ container, ...props }: JOEngagementProps) {
   console.log('JOEngagement props', props)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [searchText, setSearchText] = useState<string>('')
-  const [previewSelectedEngagement, setPreviewSelectedEngagement] = useState<EngagementOb | null>(null)
-  const [sortType, setSortType] = useState<string>('')
-  const [openFilterBar, setOpenFilterBar] = useState<boolean>(true)
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(getDefaultFilters())
 
+  const [previewSelectedEngagement, setPreviewSelectedEngagement] = useState<EngagementOb | null>(null)
   const [selectedEngagement, setSelectedEngagement] = useState<EngagementOb | null>(null)
   const [engagementsList, setEngagementsList] = useState<EngagementOb[]>([])
-
   const [loadingEngagementsList, setLoadingEngagementsList] = useState<boolean>(false)
 
   useEffect(() => {
@@ -42,10 +34,6 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
     setEngagementsList(getMockEngagements())
     setLoadingEngagementsList(false)
   }, [])
-
-  const isFiltersApplied = useMemo(() => {
-    return !isEqual(getDefaultFilters(), selectedFilters)
-  }, [selectedFilters])
 
   const cache = useMemo(
     () =>
@@ -121,36 +109,13 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
 
           <div className='px-jo-engagements__body'>
             {!previewSelectedEngagement ? (
-              <>
-                <TitleBar
-                  engagementCount={engagementsList.length}
-                  searchText={searchText}
-                  setSearchText={setSearchText}
-                  isSearching={false}
-                  sortType={sortType}
-                  setSortType={setSortType}
-                  openFilterBar={openFilterBar}
-                  setOpenFilterBar={setOpenFilterBar}
-                  isFiltersApplied={isFiltersApplied}
-                />
-
-                {openFilterBar && (
-                  <Filters
-                    filterOptions={getFilterOptions()}
-                    selectedFilters={selectedFilters}
-                    setSelectedFilters={setSelectedFilters}
-                  />
-                )}
-
-                <EngagementsList
-                  openFilterBar={openFilterBar}
-                  selectedEngagement={selectedEngagement}
-                  setSelectedEngagement={setSelectedEngagement}
-                  engagementsList={engagementsList}
-                  loadingEngagementsList={loadingEngagementsList}
-                  openPreview={setPreviewSelectedEngagement}
-                />
-              </>
+              <EngagementsListView
+                engagementsList={engagementsList}
+                selectedEngagement={selectedEngagement}
+                setSelectedEngagement={setSelectedEngagement}
+                loadingEngagementsList={loadingEngagementsList}
+                setPreviewSelectedEngagement={setPreviewSelectedEngagement}
+              />
             ) : (
               <EngagementPreview
                 engagement={previewSelectedEngagement}
