@@ -14,6 +14,7 @@ import TitleBar from './TitleBar'
 import Filters from './Filters'
 import EngagementsList from './EngagementsList'
 import { SelectedFilters, EngagementOb } from './JOEngagement.types'
+import EmptyEngagementsList from './EngagementsList/EmptyEngagementsList'
 
 interface JOEngagementProps {
   container: any
@@ -43,6 +44,55 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
   const isFiltersApplied = useMemo(() => {
     return !isEqual(getDefaultFilters(), selectedFilters)
   }, [selectedFilters])
+
+  const searchedEngagements = useMemo(() => {
+    const search = searchText.toLowerCase()
+    return !search
+      ? engagementsList
+      : engagementsList.filter(e => {
+          const name = e.name.toLowerCase()
+          return name.includes(search)
+        })
+  }, [engagementsList, searchText])
+
+  //Todo: update when we get more specific data about engagement object
+  const filteredEngagements = useMemo(() => {
+    if (!openFilterBar) return searchedEngagements
+    if (!isFiltersApplied) return searchedEngagements
+    console.log({ selectedFilters })
+    return searchedEngagements.filter(engagement => {
+      let result = true
+      if (selectedFilters.products.length)
+        result =
+          result &&
+          !!selectedFilters.products.find(
+            product => product.toLowerCase() === engagement.product.toLowerCase()
+          )
+      if (selectedFilters.channels.length)
+        result =
+          result &&
+          !!selectedFilters.channels.find(
+            channel => channel.toLowerCase() === engagement.channel.toLowerCase()
+          )
+      if (selectedFilters.engagementTypes.length)
+        result =
+          result &&
+          !!selectedFilters.engagementTypes.find(type => type.toLowerCase() === engagement.type.toLowerCase())
+      if (selectedFilters.labels.length)
+        result =
+          result &&
+          !!selectedFilters.labels.find(label =>
+            engagement.labels.find(l => l.toLowerCase() === label.toLowerCase())
+          )
+      if (selectedFilters.environments.length)
+        result =
+          result &&
+          !!selectedFilters.environments.find(environment =>
+            engagement.environments.find(env => env.toLowerCase() === environment.toLowerCase())
+          )
+      return result
+    })
+  }, [isFiltersApplied, selectedFilters, searchedEngagements, openFilterBar])
 
   const cache = useMemo(
     () =>
@@ -86,12 +136,13 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               engagementCount={engagementsList.length}
               searchText={searchText}
               setSearchText={setSearchText}
-              isSearching={false}
               sortType={sortType}
               setSortType={setSortType}
               openFilterBar={openFilterBar}
               setOpenFilterBar={setOpenFilterBar}
               isFiltersApplied={isFiltersApplied}
+              loadingEngagementsList={loadingEngagementsList}
+              setLoadingEngagementsList={setLoadingEngagementsList}
             />
 
             {openFilterBar && (
@@ -102,13 +153,17 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               />
             )}
 
-            <EngagementsList
-              openFilterBar={openFilterBar}
-              selectedEngagement={selectedEngagement}
-              setSelectedEngagement={setSelectedEngagement}
-              engagementsList={engagementsList}
-              loadingEngagementsList={loadingEngagementsList}
-            />
+            {filteredEngagements.length ? (
+              <EngagementsList
+                openFilterBar={openFilterBar}
+                selectedEngagement={selectedEngagement}
+                setSelectedEngagement={setSelectedEngagement}
+                engagementsList={filteredEngagements}
+                loadingEngagementsList={loadingEngagementsList}
+              />
+            ) : (
+              <EmptyEngagementsList openFilterBar={openFilterBar} />
+            )}
           </div>
         </div>
       </ThemeProvider>
