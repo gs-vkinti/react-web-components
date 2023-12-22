@@ -2,8 +2,8 @@
 import { styles } from './styles'
 
 import { FC, memo, useState } from 'react'
-import cx from 'classnames'
 import Popover from '@mui/material/Popover'
+import cx from 'classnames'
 
 import { EngagementCardProps } from '../../JOEngagement/JOEngagement.types'
 import { TickInCircleIcon } from '../../assets/icons'
@@ -80,9 +80,6 @@ const EngagementCard: FC<EngagementCardProps> = props => {
       </div>
 
       <Popover
-        sx={{
-          pointerEvents: 'none'
-        }}
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{
@@ -95,6 +92,9 @@ const EngagementCard: FC<EngagementCardProps> = props => {
         }}
         onClose={handlePopoverClose}
         disableRestoreFocus
+        disableAutoFocus
+        disableEnforceFocus
+        slotProps={{ paper: { onMouseEnter: handlePopoverOpen, onMouseLeave: handlePopoverClose } }}
       >
         <HoverCard {...props} />
       </Popover>

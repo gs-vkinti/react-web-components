@@ -40,6 +40,7 @@ export interface FilterTypeOb {
 
 export interface EngagementCardProps extends EngagementOb {
   isSelected: boolean
+  openPreview: () => void
 }
 
 export interface SortTypeOption {
@@ -53,6 +54,15 @@ export interface EngagementsListProps {
   setSelectedEngagement: (v: EngagementOb) => void
   engagementsList: EngagementOb[]
   loadingEngagementsList: boolean
+  openPreview: (engagement: EngagementOb) => void
+}
+
+export interface EngagementsListViewProps {
+  engagementsList: EngagementOb[]
+  selectedEngagement: EngagementOb | null
+  setSelectedEngagement: (engagement: EngagementOb) => void
+  loadingEngagementsList: boolean
+  setPreviewSelectedEngagement: (engagement: EngagementOb) => void
 }
 
 export interface SelectedFilters {
@@ -72,6 +82,18 @@ export interface EngagementOb {
   product: string
   channel: string
   environments: string[]
+}
+
+export interface EngagementPreviewProps {
+  engagement: EngagementOb
+  exitPreview: () => void
+  selectEngagement: () => void
+}
+
+export interface PaginationProps {
+  page: number
+  count: number
+  onChange: (e: React.ChangeEvent<unknown>, value: number) => void
 }
 
 export interface HoverCardProps extends EngagementCardProps {}

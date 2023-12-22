@@ -20,6 +20,7 @@ export const RICH_GRAY_90 = '#181f26'
 export const ROYAL_BLUE_10 = '#f5f9fe'
 export const ROYAL_BLUE_20 = '#e6f0fd'
 export const ROYAL_BLUE_30 = '#d2e4fb'
+export const ROYAL_BLUE_40 = '#A2C7F7'
 export const ROYAL_BLUE_60 = '#3084ED'
 export const ROYAL_BLUE_70 = '#0369e9'
 

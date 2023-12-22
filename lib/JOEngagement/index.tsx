@@ -5,15 +5,14 @@ import { useMemo, useState, useRef, useEffect } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
-import isEqual from 'lodash/isEqual'
 
-import { getDefaultFilters, getFilterOptions, getMockEngagements } from './utils'
+import { getMockEngagements } from './utils'
+import { EngagementOb } from './JOEngagement.types'
+import { RICH_GRAY_0, RICH_GRAY_40, ROYAL_BLUE_70 } from '../styles/colors'
 
 import Header from './Header'
-import TitleBar from './TitleBar'
-import Filters from './Filters'
-import EngagementsList from './EngagementsList'
-import { SelectedFilters, EngagementOb } from './JOEngagement.types'
+import EngagementPreview from './EngagementPreview'
+import EngagementsListView from './EngagementsListView'
 
 interface JOEngagementProps {
   container: any
@@ -24,14 +23,10 @@ interface JOEngagementProps {
 export default function JOEngagement({ container, ...props }: JOEngagementProps) {
   console.log('JOEngagement props', props)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [searchText, setSearchText] = useState<string>('')
-  const [sortType, setSortType] = useState<string>('')
-  const [openFilterBar, setOpenFilterBar] = useState<boolean>(true)
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(getDefaultFilters())
 
+  const [previewSelectedEngagement, setPreviewSelectedEngagement] = useState<EngagementOb | null>(null)
   const [selectedEngagement, setSelectedEngagement] = useState<EngagementOb | null>(null)
   const [engagementsList, setEngagementsList] = useState<EngagementOb[]>([])
-
   const [loadingEngagementsList, setLoadingEngagementsList] = useState<boolean>(false)
 
   useEffect(() => {
@@ -39,10 +34,6 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
     setEngagementsList(getMockEngagements())
     setLoadingEngagementsList(false)
   }, [])
-
-  const isFiltersApplied = useMemo(() => {
-    return !isEqual(getDefaultFilters(), selectedFilters)
-  }, [selectedFilters])
 
   const cache = useMemo(
     () =>
@@ -55,6 +46,16 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
   )
 
   const horizonTheme = createTheme({
+    typography: {
+      fontFamily: 'Noto Sans, sans-serif',
+      fontSize: 14,
+      fontWeightMedium: 600
+    },
+    palette: {
+      primary: {
+        main: ROYAL_BLUE_70
+      }
+    },
     components: {
       MuiPopover: {
         defaultProps: {
@@ -70,9 +71,34 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
         defaultProps: {
           container: () => containerRef.current
         }
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: ({ ownerState }) => ({
+            borderRadius: 100,
+            padding: '4px 20px',
+            textTransform: 'none',
+            lineHeight: 1.5,
+            borderColor: RICH_GRAY_40,
+            '&:hover': {
+              backgroundColor: ownerState.variant === 'outlined' ? RICH_GRAY_0 : ROYAL_BLUE_70,
+              borderColor: RICH_GRAY_40
+            }
+          })
+        },
+        defaultProps: {
+          disableRipple: true,
+          disableFocusRipple: true,
+          disableElevation: true,
+          disableTouchRipple: true
+        }
       }
     }
   })
+
+  const showEngagementListView = () => {
+    setPreviewSelectedEngagement(null)
+  }
 
   return (
     <CacheProvider value={cache}>
@@ -82,33 +108,24 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
           <Header onClose={props.cancelAction} />
 
           <div className='px-jo-engagements__body'>
-            <TitleBar
-              engagementCount={engagementsList.length}
-              searchText={searchText}
-              setSearchText={setSearchText}
-              isSearching={false}
-              sortType={sortType}
-              setSortType={setSortType}
-              openFilterBar={openFilterBar}
-              setOpenFilterBar={setOpenFilterBar}
-              isFiltersApplied={isFiltersApplied}
-            />
-
-            {openFilterBar && (
-              <Filters
-                filterOptions={getFilterOptions()}
-                selectedFilters={selectedFilters}
-                setSelectedFilters={setSelectedFilters}
+            {!previewSelectedEngagement ? (
+              <EngagementsListView
+                engagementsList={engagementsList}
+                selectedEngagement={selectedEngagement}
+                setSelectedEngagement={setSelectedEngagement}
+                loadingEngagementsList={loadingEngagementsList}
+                setPreviewSelectedEngagement={setPreviewSelectedEngagement}
+              />
+            ) : (
+              <EngagementPreview
+                engagement={previewSelectedEngagement}
+                exitPreview={showEngagementListView}
+                selectEngagement={() => {
+                  setSelectedEngagement(previewSelectedEngagement)
+                  showEngagementListView()
+                }}
               />
             )}
-
-            <EngagementsList
-              openFilterBar={openFilterBar}
-              selectedEngagement={selectedEngagement}
-              setSelectedEngagement={setSelectedEngagement}
-              engagementsList={engagementsList}
-              loadingEngagementsList={loadingEngagementsList}
-            />
           </div>
         </div>
       </ThemeProvider>

@@ -14,10 +14,11 @@ export default function EngagementsList(props: EngagementsListProps) {
           ? range(9).map(i => <EngagementSkeletonCard key={i} />)
           : props.engagementsList.map((engagement, index: number) => {
               return (
-                <div key={index} onClick={() => props.setSelectedEngagement(engagement)}>
+                <div key={index}>
                   <EngagementCard
                     isSelected={props.selectedEngagement?.id === engagement.id}
                     {...engagement}
+                    openPreview={() => props.openPreview(engagement)}
                   />
                 </div>
               )

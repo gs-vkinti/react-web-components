@@ -1,3 +1,4 @@
 import JOEngagement from './JOEngagement'
+import JOEHoverCard from './JOEHoverCard'
 
-export default JOEngagement
+export { JOEngagement, JOEHoverCard }
