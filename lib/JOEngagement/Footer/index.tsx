@@ -1,9 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { FC } from 'react'
-import { styles } from './styles'
 import Button from '@mui/material/Button'
+
+import { styles } from './styles'
 import { SELECT, CANCEL } from '../../text'
+
 type props = { action: () => void; secondaryAction: () => void }
+
 const Footer: FC<props> = props => {
   return (
     <div css={styles()}>

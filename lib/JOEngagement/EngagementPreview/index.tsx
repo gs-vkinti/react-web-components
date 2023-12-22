@@ -2,11 +2,11 @@
 import { FC } from 'react'
 import { styles } from './styles'
 
+import { FROM, QUALIFICATION_RULE, SCHEDULE, THROTTLING, TIMEZONE, TO } from '../../text'
 import { EngagementPreviewProps } from '../JOEngagement.types'
 import Footer from '../Footer'
 import TitleBar from './titlebar'
 import Slideshow from './slideshow'
-import { FROM, QUALIFICATION_RULE, SCHEDULE, THROTTLING, TIMEZONE, TO } from '../../text'
 
 const EngagementPreview: FC<EngagementPreviewProps> = ({ engagement, exitPreview, selectEngagement }) => {
   return (
