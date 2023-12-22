@@ -141,6 +141,8 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
               openFilterBar={openFilterBar}
               setOpenFilterBar={setOpenFilterBar}
               isFiltersApplied={isFiltersApplied}
+              loadingEngagementsList={loadingEngagementsList}
+              setLoadingEngagementsList={setLoadingEngagementsList}
             />
 
             {openFilterBar && (

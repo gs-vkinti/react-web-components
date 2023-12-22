@@ -20,6 +20,8 @@ interface TitleBarProps {
   isFiltersApplied?: boolean
   openFilterBar: boolean
   setOpenFilterBar: (v: boolean) => void
+  loadingEngagementsList: boolean
+  setLoadingEngagementsList: (v: boolean) => void
 }
 
 const TitleBar: FC<TitleBarProps> = props => {
@@ -43,7 +45,12 @@ const TitleBar: FC<TitleBarProps> = props => {
           {ACTIVE_ENGAGEMENTS} ({props.engagementCount})
         </div>
         <div className='joe-title-bar__filters'>
-          <SearchField onChange={props.setSearchText} placeholder={SEARCH_BY_NAME} />
+          <SearchField
+            onChange={props.setSearchText}
+            placeholder={SEARCH_BY_NAME}
+            isBusy={props.loadingEngagementsList}
+            setIsBusy={props.setLoadingEngagementsList}
+          />
           <div className='joe-title-bar__filters--icons'>
             <div className={sortIconCn}>
               {Boolean(props.sortType) && <span />}
