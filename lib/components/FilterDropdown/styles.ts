@@ -109,11 +109,5 @@ export const popoverStyles = () => css`
         }
       }
     }
-    &__search {
-      padding: 0 16px 0 12px;
-      border: 0;
-      font-size: 14px;
-      width: 284px;
-    }
   }
 `

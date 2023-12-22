@@ -9,14 +9,12 @@ import map from 'lodash/map'
 import cloneDeep from 'lodash/cloneDeep'
 
 import { FilterDropdownProps, DropdownOption } from '../../JOEngagement/JOEngagement.types'
-import { SmallEqualIcon, SmallDownChevronIcon, SearchIcon } from '../../assets/icons'
+import { SmallEqualIcon, SmallDownChevronIcon } from '../../assets/icons'
 import { Checkbox, Tooltip, ListViewTooltip } from '..'
 import { SELECT_ALL, SELECTED, ALL } from '../../text'
-import Search from '../TextField/Search'
 
 const FilterDropdown: FC<FilterDropdownProps> = props => {
   const [anchorEl, setAnchorEl] = useState<null | Element>(null)
-  const [search, setSearch] = useState<string>('')
 
   const joeFilterDropdownClassName = cx('joe-filter-dropdown', {
     'joe-filter-dropdown__selected': Boolean(anchorEl)
@@ -81,11 +79,6 @@ const FilterDropdown: FC<FilterDropdownProps> = props => {
     return { isIndeterminate, isAll }
   }, [props.selectedItems, props.options])
 
-  const searchedOptions = useMemo(
-    () => props.options.filter(o => o.label.toLowerCase().includes(search.toLowerCase())),
-    [search, props.options]
-  )
-
   const allCheckboxLabel = useMemo(
     () => (
       <div>
@@ -132,12 +125,6 @@ const FilterDropdown: FC<FilterDropdownProps> = props => {
       >
         <div css={popoverStyles()}>
           <div className='joe-filter-popover'>
-            <Search
-              className='joe-filter-popover__search'
-              onChange={setSearch}
-              startIcon={<SearchIcon />}
-              endIcon={<></>}
-            />
             <div className='joe-filter-popover__item joe-filter-popover__item--all'>
               <Checkbox
                 label={allCheckboxLabel}
@@ -146,7 +133,7 @@ const FilterDropdown: FC<FilterDropdownProps> = props => {
                 onChange={e => onChangeAll(e.target.checked)}
               />
             </div>
-            {searchedOptions.map((option, index) => {
+            {props.options.map((option, index) => {
               return (
                 <div className='joe-filter-popover__item' key={index}>
                   <Checkbox
