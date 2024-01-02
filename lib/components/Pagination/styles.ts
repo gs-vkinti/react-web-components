@@ -16,11 +16,11 @@ export default function styles() {
         &--active {
           border: 1px solid ${ROYAL_BLUE_40};
           background: ${ROYAL_BLUE_10};
-          font-weigth: 600;
+          font-weight: 600;
         }
         &:hover {
           color: ${ROYAL_BLUE_70};
-          font-weigth: 600;
+          font-weight: 600;
         }
       }
       &__icon {

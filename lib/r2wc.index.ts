@@ -19,6 +19,7 @@ window.customElements.get('px-joe-hover-card') ||
     'px-joe-hover-card',
     r2wc(JOEHoverCard, {
       props: {
+        engagementId: 'string',
         title: 'string',
         image: 'string'
       },
