@@ -9,11 +9,13 @@ import createCache from '@emotion/cache'
 
 import { NOTE, PX_ENGAGEMENT } from '../text'
 import styles from './styles'
+import Skeleton from './Skeleton'
 
 interface JOEHoverCardProps {
   container: any
-  title: string
-  image: string
+  title?: string
+  image?: string
+  engagementId: string
 }
 
 const JOEHoverCard: FC<JOEHoverCardProps> = ({ container, ...props }) => {
@@ -32,11 +34,20 @@ const JOEHoverCard: FC<JOEHoverCardProps> = ({ container, ...props }) => {
       <div css={styles()}>
         <div className='joe-hover-card'>
           <div className='joe-hover-card__title'>{PX_ENGAGEMENT}</div>
-          <div className='joe-hover-card--image'>
-            <img alt='image' src={props.image} />
+          <div className='joe-hover-card__body'>
+            {' '}
+            {props.engagementId ? (
+              <>
+                <div className='joe-hover-card--image'>
+                  <img alt='image' src={props.image} />
+                </div>
+                <div className='joe-hover-card--title'>{props.title}</div>
+              </>
+            ) : (
+              <Skeleton />
+            )}
+            <div className='joe-hover-card--note'>{NOTE}</div>
           </div>
-          <div className='joe-hover-card--title'>{props.title}</div>
-          <div className='joe-hover-card--note'>{NOTE}</div>
         </div>
       </div>
     </CacheProvider>
