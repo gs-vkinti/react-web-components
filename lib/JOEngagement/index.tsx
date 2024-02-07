@@ -100,12 +100,30 @@ export default function JOEngagement({ container, ...props }: JOEngagementProps)
     setPreviewSelectedEngagement(null)
   }
 
+  const PX_JO: any = document.getElementById('px-jo')
+
+  useEffect(() => {
+    console.log('attribute subscriptionId changed', PX_JO?.data?.subscriptionId)
+  }, [PX_JO?.data?.subscriptionId])
+
+  useEffect(() => {
+    console.log('attribute name changed', PX_JO?.data?.name)
+  }, [PX_JO?.data?.name])
+
+  const onClose = () => {
+    PX_JO?.onClose?.()
+    props.cancelAction?.()
+  }
+
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={horizonTheme}>
         <style type='text/css'>{styles}</style>
+        <div>subscription Id: {props.subscriptionId}</div>
+        <div>PX_JO data Id: {PX_JO?.data?.subscriptionId}</div>
+
         <div className='px-jo-engagements' ref={containerRef}>
-          <Header onClose={props.cancelAction} />
+          <Header onClose={onClose} />
 
           <div className='px-jo-engagements__body'>
             {!previewSelectedEngagement ? (

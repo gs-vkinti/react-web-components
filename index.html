@@ -32,9 +32,20 @@
     </script>
 
     <div style="height: 100vh">
-      <px-jo-engagement cancel-action="myFun"></px-jo-engagement>
-      <px-joe-hover-card title="hie there"></px-joe-hover-card>
+      <px-jo-engagement id="px-jo" cancel-action="myFun" ></px-jo-engagement>
+      <!-- <px-joe-hover-card title="hie there"></px-joe-hover-card> -->
     </div>
+
+    <script>
+      (() => {        
+        const PX_JO = document.getElementById("px-jo")
+        PX_JO.cancelAction = () => alert("on action called")
+        PX_JO.myObject = { name: "this.state.name" }
+      })()
+    </script>
+
+
+   
 
     <script type="module" src="/src/main.tsx"></script>
   </body>
