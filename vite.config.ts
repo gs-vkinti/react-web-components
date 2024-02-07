@@ -30,7 +30,7 @@ export default defineConfig((options: ConfigEnv): any => {
           // Could also be a dictionary or array of multiple entry points
           entry: resolve(__dirname, 'lib/r2wc.index.ts'),
           formats: ['es', 'umd'],
-          name: 'PX Counter',
+          name: 'PX JO Engagement',
           // the proper extensions will be added
           fileName: format => `px-jo-engagements.r2wc.${format}.js`
         },
@@ -52,7 +52,7 @@ export default defineConfig((options: ConfigEnv): any => {
           // Could also be a dictionary or array of multiple entry points
           entry: resolve(__dirname, 'lib/index.ts'),
           formats: ['es'],
-          name: 'Px Counter',
+          name: 'PX JO Engagement',
           // the proper extensions will be added
           fileName: format => `px-jo-engagements.${format}.js`
         },
